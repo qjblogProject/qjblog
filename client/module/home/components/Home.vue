@@ -1,24 +1,24 @@
 <template>
-  <div id="app">
-    <img src="../../../src/assets/logo.png">
-  </div>
+   <div id="app">
+    	<img src="../../../src/assets/logo.png">
+    </div>
 </template>
 
 <script>
 export default {
-  data(){
-    return {
+	data(){
+		return {
 
-    }
-  },
-  created(){
-    this.$http({
-      url:'/api/login',
-      method:'post'
-    }).then((res)=>{
-      console.log(res)
-    })
-  }
+		}
+	},
+	created(){
+		this.$http({
+			url:'/api/login',
+			method:'post'
+		}).then((res)=>{
+			console.log(res)
+		})
+	}
 }
 </script>
 
