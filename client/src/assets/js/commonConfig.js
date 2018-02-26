@@ -21,21 +21,10 @@ export default (store,router,callBack) => {
     // axios response拦截器
     axios.interceptors.response.use((res) => {
 
-        // 拦截requset
-        if(res.data.status == false && res.data.code == 4001){//登录过期
-            // window.location.href='/login?from='+ window.location.href;
-            return Promise.resolve(res);
-        }
         return Promise.resolve(res);
     }, (error) => {
-        // 拦截报错请求 (未登陆在这里拦截)
-        console.log(error)
-        const data = error.response;
-        if(data.data.status == false && data.data.code == 4001){//登录过期
-            // window.location.href='/login?from='+window.location.href;
-            return Promise.reject(data);
-        }
-        return Promise.reject(data);
+        
+        return Promise.reject(error);
     });
 
     router.beforeEach(async (to, from, next) => {
