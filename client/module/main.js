@@ -4,8 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-
 import axios from 'axios';
+import '../src/assets/scss/base.scss'
+import ElementUi from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import '../src/assets/scss/el.scss'
+
+Vue.use(ElementUi)
 
 Vue.http = axios;
 Vue.prototype.$http = axios;

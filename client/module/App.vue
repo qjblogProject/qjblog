@@ -11,7 +11,7 @@
 export default {
   name: 'app',
   deactivated(){
-    this.$destroy();
+    this.$destroy(); //默认不做先不做keep-alive
   }
 }
 </script>
