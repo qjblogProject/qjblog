@@ -1,4 +1,4 @@
-import Home from '../components/Home'
+import Home from '../components/Index'
 
 var metaData = {
     title:'首页'
