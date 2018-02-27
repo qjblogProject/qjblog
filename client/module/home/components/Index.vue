@@ -5,10 +5,10 @@
 			<list-component slot='content'></list-component>
 			<sidebar-component slot='sidebar'>
 				<operation-component slot='operation'></operation-component>
-				<category-component 
-					slot='category'
+				<tag-category-component 
+					slot='tagCategory'
 					@click='clickH'>
-				</category-component>
+				</tag-category-component>
 				<search-component slot='search'></search-component>
 			</sidebar-component>
 		</container-component>
@@ -23,7 +23,7 @@ import containerComponent from 'components/layout/container'
 import listComponent from './list'
 import sidebarComponent from 'components/common/sidebar'
 import operationComponent from 'components/common/operation'
-import categoryComponent from 'components/common/category'
+import tagCategoryComponent from 'components/common/tagCategory'
 import searchComponent from 'components/common/search'
 
 export default {
@@ -44,7 +44,7 @@ export default {
 		'list-component':listComponent,
 		'sidebar-component':sidebarComponent,
 		'operation-component':operationComponent,
-		'category-component':categoryComponent,
+		'tag-category-component':tagCategoryComponent,
 		'search-component':searchComponent
 	}
 }

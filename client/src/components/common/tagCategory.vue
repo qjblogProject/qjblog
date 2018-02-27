@@ -1,5 +1,5 @@
 <template>
-    <ul class="tag-list clearfix">
+    <ul class="tag-category clearfix">
         <li v-for='item in list' 
             :key='item.id' class='fl' 
             :class='"color-"+Math.floor(Math.random()*(10-1+1)+1)'
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style lang='scss'>
-.tag-list{
+.tag-category{
     margin-bottom: 10px;
     padding: 25px 20px 5px;
     border-radius: 4px;

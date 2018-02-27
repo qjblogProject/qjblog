@@ -1,9 +1,9 @@
 <template>
     <div class="sidebar">
         <slot name='operation'></slot>
-        <slot name='category'></slot>
+        <slot name='tagCategory'></slot>
         <slot name='search'></slot>
-        <slot name='dateMenu'></slot>
+        <slot name='dateCategory'></slot>
     </div>
 </template>
 
