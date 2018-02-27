@@ -3,9 +3,9 @@
         <el-input 
             placeholder="请输入搜索标题／作者"
             prefix-icon="el-icon-search"
-            v-model="keword">
+            v-model="kewords">
         </el-input>
-        <i v-if='keword' @click='handleClearSeach' class='icon icon-delete6'></i>
+        <i v-if='kewords' @click='handleClearSeach' class='icon icon-delete6'></i>
     </div>
 </template>
 
@@ -13,18 +13,18 @@
 export default {
 	data(){
 		return {
-            keword:''
+            kewords:''
         }
     },
     methods:{
         handleClearSeach(){
             let t = this;
-            t.keword = '';
-            t.$emit('handleClearSeach',t.keword)
+            t.kewords = '';
+            t.$emit('handleClearSeach',t.kewords)
         },
         handleSeach(){
             let t = this;
-            this.$emit('handleClearSeach',t.keword)
+            this.$emit('handleClearSeach',t.kewords)
         }
     }
 }
