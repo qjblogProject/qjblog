@@ -6,13 +6,14 @@ import router from './router'
 import store from './store'
 import axios from 'axios';
 import '../src/assets/scss/base.scss'
+import 'assets/icon/icon.css'
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '../src/assets/scss/el.scss'
 
 Vue.use(ElementUi)
 
-Vue.http = axios;
+Vue.$http = axios;
 Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false

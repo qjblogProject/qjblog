@@ -230,6 +230,12 @@ textarea {
     display: none;
 }
 /*清除浮动*/
+.fl{
+    float:left;
+}
+.fr{
+    float:right;
+}
 .clearfix:before, .clearfix:after {
     content: "";
     display: table;
@@ -280,6 +286,9 @@ select.fullWidth {
      display: none;
  }
 
-
+a {
+    cursor: pointer;
+    color: #555;
+}
 
 
