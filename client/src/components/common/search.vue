@@ -1,5 +1,5 @@
 <template>
-    <div class="search">
+    <div class="search-wrap">
         <el-input 
             placeholder="请输入搜索标题／作者"
             prefix-icon="el-icon-search"
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang='scss'>
-.search{
+.search-wrap{
     position: relative;
     .icon-delete6{
         cursor: pointer;
