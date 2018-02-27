@@ -5,6 +5,8 @@ const path = require('path')
 const route = require('./api')
 let app = express()
 
+app.use(bodyParser.json());
+
 //注册http监听
 route(app)
 

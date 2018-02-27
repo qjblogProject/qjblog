@@ -9,4 +9,11 @@ router.post('/api/login',(req,res)=>{
     })
 })
 
+// 用户登录
+router.post('/login/ajax-login',(req,res) => {
+	db.login({},(err,result)=>{
+	    res.send(result)
+	})
+})
+
 module.exports = router

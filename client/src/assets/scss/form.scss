@@ -1,0 +1,40 @@
+$wrapBgColor:#29a177;
+$titleBgColor:#0e5e45;
+
+
+.form-wrap{
+	.top{
+		height: 245px;
+		background: $wrapBgColor;
+	}
+	.sign-in{
+		width: 450px;
+		box-shadow: 0 0 15px #c0c0c0;
+		border-radius: 6px;
+		position: relative;
+		top: -80px;
+		background: #fff;
+		margin: 0 auto;
+		padding: 30px;
+		box-sizing: border-box;
+	}
+	.title{
+		line-height: 44px;
+		position: relative;
+		top: -30px;
+		margin: 0 -30px 15px;
+		text-align: center;
+		background: $titleBgColor;
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+		color: #fff;
+		font-size: 16px;
+	}
+	.el-form{
+		margin-bottom:40px;
+	}
+	.login-btn{
+		display: block;
+		margin: 0 auto;
+	}
+}

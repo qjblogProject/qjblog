@@ -13,6 +13,9 @@ module.exports = {
     proxyTable: {
       '/api':{
         target:'http://localhost:3000'
+      },
+      '**/ajax**':{
+        target:'http://localhost:3000'
       }
     },
 

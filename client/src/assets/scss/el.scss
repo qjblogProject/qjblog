@@ -1,3 +1,12 @@
+$mainColor:#0e5e45;
+
 body{
     background: #f7f7f7;
+}
+
+.blog-btn {
+	padding-left: 30px;
+	padding-right: 30px;
+	background: $mainColor;
+	border-color:$mainColor;
 }

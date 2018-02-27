@@ -5,5 +5,9 @@ module.exports = {
         query('select * from user',(err,result)=>{
             callback(err,result)
         })
+    },
+    register(data,callback){
+    	console.log(data)
+    	// query(`insert into user(name,password,email,mobile)`)
     }
 }
