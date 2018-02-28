@@ -7,7 +7,9 @@ module.exports = {
         })
     },
     register(data,callback){
-    	console.log(data)
-    	// query(`insert into user(name,password,email,mobile)`)
+    	const sql = `insert into user(name,password,email,mobile,add_time,modi_time) values('${data.name}',${data.password},'${data.email}',${data.mobile},${data.time},${data.time})`;
+    	query(sql,(err,result) => {
+    		callback(err,result)
+    	})
     }
 }
