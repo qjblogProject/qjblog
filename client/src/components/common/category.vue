@@ -27,7 +27,7 @@ export default {
 <style lang='scss'>
 .tag-list{
     margin-bottom: 10px;
-    padding: 25px 20px 15px;
+    padding: 25px 20px 5px;
     border-radius: 4px;
     box-shadow: 0 0 4px#eee;
     background: #fff;
