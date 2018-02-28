@@ -2,15 +2,21 @@
    <div id="home">
     	<header-component></header-component>
 		<container-component>
+			<!--主页内容-->
 			<list-component slot='content'></list-component>
+			<!--主页右侧区域栏-->
 			<sidebar-component slot='sidebar'>
+				<!--快捷操作组建-->
 				<operation-component slot='operation'></operation-component>
+				<!--标签分类组建-->
 				<tag-category-component 
 					slot='tagCategory'
 					:dataList='tagList'
 					@click='clickH'>
 				</tag-category-component>
+				<!--关键字搜索组建-->
 				<search-component slot='search'></search-component>
+				<!--时间分类组建-->
 				<date-category-component
 					slot='dateCategory'
 					:dataList='dateCategoryList'
