@@ -33,6 +33,7 @@ export default {
 <style lang='scss'>
 .search-wrap{
     position: relative;
+    margin-bottom: 10px;
     .icon-delete6{
         cursor: pointer;
         position: absolute;

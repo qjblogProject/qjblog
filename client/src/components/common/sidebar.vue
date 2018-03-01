@@ -1,9 +1,9 @@
 <template>
     <div class="sidebar">
         <slot name='operation'></slot>
-        <slot name='category'></slot>
+        <slot name='tagCategory'></slot>
         <slot name='search'></slot>
-        <slot name='dateMenu'></slot>
+        <slot name='dateCategory'></slot>
     </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
 <style lang='scss'>
 .sidebar{
     position: fixed;
-    right: 5%;
+    right: 10%;
     top: 90px;
     padding-top: 10px;
     width: 290px;

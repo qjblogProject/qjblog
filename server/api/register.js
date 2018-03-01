@@ -8,7 +8,6 @@ router.post('/register/ajax-register',(req,res) => {
 	data.time = new Date().getTime();
 	db.register(data,(err,result) => {
 		let json = '';
-		console.log(err);
 		// if(result.serverStatus === 2){
 		// 	json = formatJSON({},true,'注册成功',200);
 		// }else{
