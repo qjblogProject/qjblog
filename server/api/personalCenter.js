@@ -5,7 +5,7 @@ const db = require('../db/dbModule')
 //保存文章
 router.post('/personal-center/ajax-save-articel',(req,res) => {
     let data = req.body;
-    db.addArticel(data,(err,result)=>{
+    db.articel.addArticel(data,(err,result)=>{
         if(err){
             res.status(500).send({massage:err,status:0,code:5000}); 
         }
@@ -16,7 +16,7 @@ router.post('/personal-center/ajax-save-articel',(req,res) => {
 //保存草稿
 router.post('/personal-center/ajax-save-articel-draft',(req,res) => {
     let data = req.body;
-    db.addArticelDraft(data,(err,result)=>{
+    db.articel.addArticelDraft(data,(err,result)=>{
         if(err){
             res.status(500).send({massage:err,status:0,code:5000}); 
         }

@@ -1,32 +1,10 @@
 const query = require('./connectQuery')
+const articel = require('./articelDbModule')
+const user = require('./userDbModule')
 
-module.exports = {
-    login(data,callback){
-        query('select * from user',(err,result)=>{
-            callback(err,result)
-        })
-    },
-    register(data,callback){
-    	const sql = `insert into user(name,password,email,mobile,add_time,modi_time) values('${data.name}',${data.password},'${data.email}',${data.mobile},${data.time},${data.time})`;
-    	query(sql,(err,result) => {
-    		callback(err,result)
-    	})
-    },
-
-    //保存文章
-    addArticel(data,callback){
-        const add_time = new Date().getTime();
-        const sql = `insert into article(title,user_id,content,add_time,modi_time) values('${data.title}',${data.userId},'${data.content}',${add_time},${add_time})`;
-        query(sql,(err,result) => {
-    		callback(err,result)
-    	})
-    },
-    //保存草稿
-    addArticelDraft(data,callback){
-        const add_time = new Date().getTime();
-        const sql = `insert into article_draft(title,user_id,content,add_time,modi_time) values('${data.title}',${data.userId},'${data.content}',${add_time},${add_time})`;
-        query(sql,(err,result) => {
-    		callback(err,result)
-    	})
-    }
+let dbModule = {
+    articel,
+    user
 }
+module.exports = dbModule
+

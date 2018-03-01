@@ -6,7 +6,7 @@ const db = require('../db/dbModule')
 router.post('/register/ajax-register',(req,res) => {
 	const data = req.body;
 	data.time = new Date().getTime();
-	db.register(data,(err,result) => {
+	db.user.register(data,(err,result) => {
 		let json = '';
 		// if(result.serverStatus === 2){
 		// 	json = formatJSON({},true,'注册成功',200);
