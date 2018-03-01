@@ -5,11 +5,12 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from 'axios';
-import '../src/assets/scss/base.scss'
+import 'assets/scss/base.scss'
 import 'assets/icon/icon.css'
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import '../src/assets/scss/el.scss'
+import 'assets/scss/el.scss'
+import commonConfig from 'assets/js/commonConfig.js'
 
 Vue.use(ElementUi)
 
@@ -18,6 +19,7 @@ Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false
 
+commonConfig(store,router)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -26,3 +28,4 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+

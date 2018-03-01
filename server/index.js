@@ -27,7 +27,8 @@ app.use(bodyParser.urlencoded({extened:false})); //处理urlencode格式请求�
 //设置端口port，如果process里没有则默认3000
 app.set('port',(process.env.port || 3000))
 
-//注册http监听
+
+//注册http监听,一定要放在bodyParser之后
 route(app)
 
 

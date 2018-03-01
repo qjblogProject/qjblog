@@ -1,7 +1,7 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import { baseModule } from 'src/baseStore'
 import { homeModule } from '../home/storeConfig'
 Vue.use(Vuex)
 
@@ -10,6 +10,7 @@ const Store = new Vuex.Store({
 
     },
     modules:{
+        base:baseModule,
         home:homeModule
     }
 })

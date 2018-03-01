@@ -1,25 +1,30 @@
 <template>
-    <ul class="fast-operation clearfix">
-        <li class='fl'>
+    <div class="fast-operation clearfix">
+        <router-link to='/edit' target='_blank' class='fl'>
             <i class='icon icon-edit'></i>
             <span class='edit'>写文章</span>
-        </li>
-        <li class='fl'>
+        </router-link>
+        <a href='javascript:void(0);' @click='han' class='fl'>
             <i class='icon icon-visible'></i>
             <span class='visible'>发表</span>
-        </li>
-        <li class='fl'>
+        </a>
+        <router-link to='/' class='fl'>
             <i class='icon icon-set'></i>
             <span class='set'>设置</span>
-        </li>
-    </ul>
+        </router-link>
+    </div>
 </template>
 
 <script>
 export default {
 	data(){
 		return {}
-	}
+    },
+    methods:{
+        han(){
+            console.log(22)
+        }
+    }
 }
 </script>
 
@@ -30,7 +35,7 @@ export default {
     border-radius: 4px;
     box-shadow:0 0 4px #eee;
     padding: 25px 20px;
-    li{
+    a{
         cursor: pointer;
         width:33.33%;
         i,span{
