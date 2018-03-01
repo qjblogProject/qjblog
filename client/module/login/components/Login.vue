@@ -15,12 +15,13 @@
 					<el-input v-model.trim='loginForm.password'></el-input>
 				</el-form-item>
 			</el-form>
-			<el-button class='blog-btn login-btn' type='primary' @click="submitLoginForm('loginForm')">登录</el-button>
+			<el-button class='login-btn' type='primary' @click="submitLoginForm('loginForm')">登录</el-button>
 		</div>
 	</div>
 </template>
 
 <script>
+import Verify from 'assets/js/Verify.js';
 export default {
 	data(){
 		var validatPass = function(rule,value,callback){
@@ -38,13 +39,13 @@ export default {
 			},
 			rules:{
 				userName:[
-					{ required: true, message: '不能为空', trigger: 'blur' },
+					{validator: Verify.validateRequired, trigger: 'blur'},
             		{ min: 2, max: 8, message: '长度在 2 ～ 8 个字符', trigger: 'blur' }
 				],
 				password:[
-					{ required: true, message: '不能为空', trigger: 'blur' },
-            		{ validator: validatPass, trigger: 'blur' }
-				]
+					{validator: Verify.validateRequired, trigger: 'blur'},
+					{validator: Verify.validatePass, trigger: 'blur'},
+				],
 			}
 		}
 	},

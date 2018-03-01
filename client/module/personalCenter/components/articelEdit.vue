@@ -59,23 +59,52 @@ export default {
 		handleSave(){
 			let t = this;
 			t.handleGetEditContent()
-			t.checkTitle()
+
+			//验证标题不能为空，为空return
+			if(!t.checkTitle()){
+				return ;
+			}
+			//ajax请求，保存文章
 			t.$http({
 				url:'/personal-center/ajax-save-articel',
 				method:'post',
-				data:{a:'1'}
+				data:{
+					userId:3,
+					title:t.title,
+					content:t.content
+				}
 			}).then((res)=>{
 				console.log(res)
 			})
 		},
 		handleSaveDraft(){
+			let t = this;
+			t.handleGetEditContent()
 
+			//验证标题不能为空，为空return
+			if(!t.checkTitle()){
+				return ;
+			}
+			//ajax请求，保存文章
+			t.$http({
+				url:'/personal-center/ajax-save-articel-draft',
+				method:'post',
+				data:{
+					userId:3,
+					title:t.title,
+					content:t.content
+				}
+			}).then((res)=>{
+				console.log(res)
+			})
 		},
 		checkTitle(){
 			if(this.title == ''){
 				this.errorText = '标题为空无法保存';
+				return false;
 			}else{
 				this.errorText = '';
+				return true;
 			}
 		}
 	}
