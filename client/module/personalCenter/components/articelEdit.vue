@@ -1,17 +1,20 @@
 <template>
    	<div class="articel-edit">
 		<div class='edit-menu clearfix'>
+			<p class='menu-title fl'>
+				文章编辑
+				<span class='error-text'>{{errorText}}</span>
+			</p>
 			<p class='btn-group fr'>
-				<el-button>保存</el-button>
-				<el-button>存草稿</el-button>
+				<el-button @click='handleSave'>保存</el-button>
+				<el-button @click='handleSaveDraft'>存草稿</el-button>
 			</p>
 		</div>
-		
 		<div class='edit-content' :style='{"min-height":winHeight-60+"px"}'>
 			<el-row class='articel-title'>
 				<label class='fl'>文章标题</label>
 				<el-col :span='9'>
-					<el-input class='qj-input' :model="title" placeholder="请输入文章标题"></el-input>
+					<el-input class='qj-input' v-model.trim="title" placeholder="请输入文章标题"></el-input>
 				</el-col>
 			</el-row>
 			<div id='editorHead' class='editor-head'></div>
@@ -28,7 +31,9 @@ export default {
 	data(){
 		return {
 			editor:'',
-			title:''
+			title:'',
+			content:'',
+			errorText:''
 		}
 	},
 	computed:{
@@ -47,9 +52,31 @@ export default {
 			t.editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
 			t.editor.create();	
 		},
+		//获取文章编辑内容，并做content存储
 		handleGetEditContent(){
+			this.content = this.editor.txt.html();
+		},
+		handleSave(){
 			let t = this;
+			t.handleGetEditContent()
+			t.checkTitle()
+			t.$http({
+				url:'/personal-center/ajax-save-articel',
+				method:'post',
+				data:{a:'1'}
+			}).then((res)=>{
+				console.log(res)
+			})
+		},
+		handleSaveDraft(){
 
+		},
+		checkTitle(){
+			if(this.title == ''){
+				this.errorText = '标题为空无法保存';
+			}else{
+				this.errorText = '';
+			}
 		}
 	}
 }
@@ -67,6 +94,15 @@ export default {
 		padding: 0 10%;
 		height: 50px;
 		background: #fff;
+		.menu-title{
+			line-height: 50px;
+			font-weight: 500;
+			.error-text{
+				margin-left: 15px;
+				font-weight: normal;
+				color:#aaa;
+			}
+		}
 		.btn-group{
 			margin-top: 10px;
 			.el-button{
