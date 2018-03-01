@@ -7,11 +7,11 @@ var metaData = {
 export default [
     {
         path: '/',
-        redirect:'/home/index',
+        redirect:'/home',
         meta: metaData           
     },
     {
-        path: '/home/index',
+        path: '/home',
         component: Home,
         meta: metaData           
     },

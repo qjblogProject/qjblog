@@ -1,4 +1,7 @@
 $mainColor:#0e5e45;
+$textViceHeaderColor: #9e9ea6;
+$link:#409EFF;
+
 
 body{
     background: #f7f7f7;
@@ -9,4 +12,18 @@ body{
 	padding-right: 30px;
 	background: $mainColor;
 	border-color:$mainColor;
+}
+
+.el-input.qj-input, .el-select.qj-select, .qj-input.el-textarea{
+	input, textarea {
+		border-radius: 3px;
+		border-color: transparent;
+		padding-left: 10px;
+	}
+	input:hover, textarea:hover {
+		border-color: $textViceHeaderColor;
+	}
+	input:focus, textarea:focus {
+		border-color: $link;
+	}
 }
