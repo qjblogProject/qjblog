@@ -85,7 +85,18 @@ export default {
 						method:'post',
 						data:postData
 					}).then(res => {
-						console.log(res)
+						let result = res.data;
+						if(result.status){
+							t.$message({
+								message:result.message,
+								type:'success'
+							})
+						}else{
+							t.$message({
+								message:result.message,
+								type:'error'
+							})
+						}
 					})
 				}else{
 					return false

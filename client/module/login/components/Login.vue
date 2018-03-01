@@ -8,8 +8,8 @@
 				:rules='rules' 
 				ref='loginForm'
 				label-width='80px'>
-				<el-form-item label='用户名' prop='userName'>
-					<el-input v-model.trim='loginForm.userName'></el-input>
+				<el-form-item label='用户名' prop='name'>
+					<el-input v-model.trim='loginForm.name'></el-input>
 				</el-form-item>
 				<el-form-item label='密码' prop='password'>
 					<el-input v-model.trim='loginForm.password'></el-input>
@@ -34,11 +34,11 @@ export default {
 		}
 		return {
 			loginForm:{
-				userName:'',
+				name:'',
 				password:''
 			},
 			rules:{
-				userName:[
+				name:[
 					{validator: Verify.validateRequired, trigger: 'blur'},
             		{ min: 2, max: 8, message: '长度在 2 ～ 8 个字符', trigger: 'blur' }
 				],
@@ -56,9 +56,21 @@ export default {
 				if(valid) {
 					this.$http({
 						url:'login/ajax-login',
-						method:'post'
+						method:'post',
+						data:t.loginForm
 					}).then((res)=>{
-						console.log(res)
+						let result = res.data;
+						if(result.status){
+							t.$message({
+								message:result.message,
+								type:'success'
+							})
+						}else{
+							t.$message({
+								message:result.message,
+								type:'error'
+							})
+						}
 					})
 				}else {
 					return false;
