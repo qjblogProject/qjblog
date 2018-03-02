@@ -1,6 +1,6 @@
 <template>
-    <ul class="tag-list clearfix">
-        <li v-for='item in list' 
+    <ul class="tag-category clearfix">
+        <li v-for='item in dataList' 
             :key='item.id' class='fl' 
             :class='"color-"+Math.floor(Math.random()*(10-1+1)+1)'
             @click="handleClickTag(item.id)">
@@ -11,9 +11,15 @@
 
 <script>
 export default {
+    props:{
+        dataList:{
+            type:Array,
+            default:[]
+        }
+    },
 	data(){
 		return {
-            list:[{name:'html',id:1},{name:'css',id:2},{name:'java',id:3},{name:'php',id:4},{name:'canvs',id:5},{name:'sql',id:6}]
+            
         }
     },
     methods:{
@@ -25,7 +31,7 @@ export default {
 </script>
 
 <style lang='scss'>
-.tag-list{
+.tag-category{
     margin-bottom: 10px;
     padding: 25px 20px 5px;
     border-radius: 4px;
