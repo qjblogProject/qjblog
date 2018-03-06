@@ -7,7 +7,7 @@ const commonFunc = require('../common/commonFunc.js')
 router.post('/register/ajax-register',(req,res) => {
 	const data = req.body;
 	data.time = new Date().getTime();
-	db.register(data,(err,result) => {
+	db.user.register(data,(err,result) => {
 		let json = '';
 		// 错误处理
 		if(err) {

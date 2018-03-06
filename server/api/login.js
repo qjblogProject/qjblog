@@ -8,7 +8,7 @@ const commonFunc = require('../common/commonFunc.js')
 // 用户登录
 router.post('/login/ajax-login',(req,res) => {
 	const data = req.body;
-	db.login(data,(err,result)=>{
+	db.user.login(data,(err,result)=>{
 		let json = '';
 		// 错误处理
 		if(err) {
