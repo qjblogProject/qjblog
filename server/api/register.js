@@ -9,6 +9,12 @@ router.post('/register/ajax-register',(req,res) => {
 	data.time = new Date().getTime();
 	db.register(data,(err,result) => {
 		let json = '';
+		// 错误处理
+		if(err) {
+			json = commonFunc.formatJSON({},false,'服务器错误',500);
+			res.send(json);
+		}
+
 		if(!!result){
 			let mes = '';
 			if(result.exist){
