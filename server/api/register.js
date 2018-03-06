@@ -1,6 +1,7 @@
 const express = require('express')
 let router = express.Router()
 const db = require('../db/dbModule')
+const commonFunc = require('../common/commonFunc.js')
 
 
 router.post('/register/ajax-register',(req,res) => {
@@ -8,23 +9,28 @@ router.post('/register/ajax-register',(req,res) => {
 	data.time = new Date().getTime();
 	db.user.register(data,(err,result) => {
 		let json = '';
-		// if(result.serverStatus === 2){
-		// 	json = formatJSON({},true,'注册成功',200);
-		// }else{
-		// 	json = formatJSON({},false,'注册失败',4001);
-		// }
+		// 错误处理
+		if(err) {
+			json = commonFunc.formatJSON({},false,'服务器错误',500);
+			res.send(json);
+		}
+
+		if(!!result){
+			let mes = '';
+			if(result.exist){
+				json = commonFunc.formatJSON({},false,'用户名已存在',200);
+			}else if(result.serverStatus === 2){
+
+				//写入session
+				req.session.username = data.name;
+				json = commonFunc.formatJSON({'name':data.name},true,'注册成功',200);
+			}
+			
+		}else{
+			json = commonFunc.formatJSON({},false,'注册失败',4001);
+		}
 		res.send(json);
 	})
 })
 
 module.exports = router
-
-function formatJSON(data,status,message,code){
-	let json = {
-		code,
-		data,
-		message,
-		status
-	};
-	return JSON.stringify(json);
-}

@@ -31,6 +31,8 @@ export default {
 	data(){
 		return {
 			editor:'',
+			articelId:'',
+			articelDraftId:'',
 			title:'',
 			content:'',
 			errorText:''
@@ -64,15 +66,20 @@ export default {
 			if(!t.checkTitle()){
 				return ;
 			}
-			//ajax请求，保存文章
-			t.$http({
-				url:'/personal-center/ajax-save-articel',
-				method:'post',
-				data:{
+			//构造postData数据
+			let postData = {
 					userId:3,
 					title:t.title,
 					content:t.content
 				}
+			if(t.articelId){
+				postData.articelId = t.articelId;
+			}
+			//ajax请求，保存文章
+			t.$http({
+				url:'/articel/ajax-save-articel',
+				method:'post',
+				data:postData
 			}).then((res)=>{
 				console.log(res)
 			})
@@ -85,17 +92,26 @@ export default {
 			if(!t.checkTitle()){
 				return ;
 			}
-			//ajax请求，保存文章
-			t.$http({
-				url:'/personal-center/ajax-save-articel-draft',
-				method:'post',
-				data:{
+			//构造postData数据
+			let postData = {
 					userId:3,
 					title:t.title,
 					content:t.content
 				}
+			if(t.articelDraftId){
+				postData.articelDraftId = t.articelDraftId;
+			}
+			//ajax请求，保存文章
+			t.$http({
+				url:'/articel/ajax-save-articel-draft',
+				method:'post',
+				data:postData
 			}).then((res)=>{
-				console.log(res)
+				if(!res.status){
+					t.$message.error(res.message)
+					return;
+				}
+				t.$message.success(res.message)
 			})
 		},
 		checkTitle(){

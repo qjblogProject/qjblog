@@ -1,7 +1,7 @@
 <template>
    <div id="home">
-    	<header-component></header-component>
-		<container-component>
+    	<header-component :user="user"></header-component>
+		<container-component :have-right='true'>
 			<!--主页内容-->
 			<list-component slot='content'></list-component>
 			<!--主页右侧区域栏-->
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import headerComponent from 'components/layout/header'
 import footerComponent from 'components/layout/footer'
 import containerComponent from 'components/layout/container'
@@ -85,6 +86,11 @@ export default {
                 }
             ]
 		}
+	},
+	computed: {
+		...mapGetters('base',{
+			'user':'getUser'
+		})
 	},
 	methods:{
 		clickH(id){

@@ -1,14 +1,14 @@
 <template>
     <div class="header-wrap">
         <p class='top-text'>
-            <a href="javascript;">欢迎洋洋兔的夏天～</a>
-            <a href="javascript;">sign up</a>
-            <a href="javascript;">sign in</a>
+            <a href="javascript;" v-if="!!user">欢迎{{user}}</a>
+            <a href="/login">sign up</a>
+            <a href="/register">sign in</a>
         </p>
         <p class='blog-title'>薪人薪事博客平台</p>
         <ul class='nav clearfix'>
             <li :class='{active:activeNav=="home"}'>首页</li>
-            <li :class='{active:activeNav=="personal"}'>个人主页</li>
+            <li :class='{active:activeNav=="personal"}' @click='$router.push("/personal")'>个人主页</li>
             <li :class='{active:activeNav=="about"}'><a href='//www.xinrenxinshi.com' target='_blank'>关于我们</a></li>
         </ul>
     </div>
@@ -16,6 +16,14 @@
 
 <script>
 export default {
+    props:{
+        'user': {
+            type: String,
+            default: () => {
+                return ''
+            }
+        }
+    },
 	data(){
 		return {
             activeNav:'home'
@@ -35,7 +43,7 @@ export default {
     z-index: 10;
     top: 0;
     width: 100%;
-    padding: 0 10%;
+    padding: 0 5%;
     height: 90px;
     border-top: 25px solid #31353e;
     border-bottom: 5px solid #a3bb51;
