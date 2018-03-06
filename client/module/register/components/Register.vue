@@ -80,20 +80,16 @@ export default {
 					const postData = JSON.parse(JSON.stringify(t.regForm));
 					delete postData.checkPassword;
 
-					t.$http({
-						url:'/register/ajax-register',
-						method:'post',
-						data:postData
-					}).then(res => {
-						let result = res.data;
-						if(result.status){
+					t.$store.dispatch('base/setRegUser',postData).then(res => {
+						if(res.status){
 							t.$message({
-								message:result.message,
+								message:res.message,
 								type:'success'
 							})
-						}else{
+							t.$router.push('/home');
+						}else {
 							t.$message({
-								message:result.message,
+								message:res.message,
 								type:'error'
 							})
 						}

@@ -15,7 +15,6 @@ module.exports = {
             if(!select_result.length){
                 // 插入数据
                 query(insert_sql,(err,insert_result) => {
-                    console.log(insert_result)
                     callback(err,insert_result);
                 })
             }else{
@@ -23,5 +22,5 @@ module.exports = {
                 callback(err,{'exist':true});
             }
         })
-    }
+    },
 }

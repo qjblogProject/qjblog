@@ -1,9 +1,9 @@
 <template>
     <div class="header-wrap">
         <p class='top-text'>
-            <a href="javascript;">欢迎洋洋兔的夏天～</a>
-            <a href="javascript;">sign up</a>
-            <a href="javascript;">sign in</a>
+            <a href="javascript;" v-if="!!user">欢迎{{user}}</a>
+            <a href="/login">sign up</a>
+            <a href="/register">sign in</a>
         </p>
         <p class='blog-title'>薪人薪事博客平台</p>
         <ul class='nav clearfix'>
@@ -16,6 +16,14 @@
 
 <script>
 export default {
+    props:{
+        'user': {
+            type: String,
+            default: () => {
+                return ''
+            }
+        }
+    },
 	data(){
 		return {
             activeNav:'home'

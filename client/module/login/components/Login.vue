@@ -49,25 +49,22 @@ export default {
 			}
 		}
 	},
+	
 	methods:{
 		submitLoginForm(formName){
 			const t = this;
 			t.$refs[formName].validate((valid) => {
 				if(valid) {
-					this.$http({
-						url:'login/ajax-login',
-						method:'post',
-						data:t.loginForm
-					}).then((res)=>{
-						let result = res.data;
-						if(result.status){
+					t.$store.dispatch('base/setLoginUser',t.loginForm).then(res => {
+						if(res.status){
 							t.$message({
-								message:result.message,
+								message:res.message,
 								type:'success'
 							})
-						}else{
+							t.$router.push('/home');
+						}else {
 							t.$message({
-								message:result.message,
+								message:res.message,
 								type:'error'
 							})
 						}
@@ -77,7 +74,7 @@ export default {
 				}
 			})
 		}
-	}
+	},
 }
 </script>
 
