@@ -24,11 +24,11 @@ export default {
 	//密码
 	validatePass(rule,value,callback){
 		var value = value.trim();
-		let reg = /^[a-zA-Z0-9]{8,12}$/;
+		let reg = /^[a-zA-Z0-9]{6,8}$/;
 		if(reg.test(value)){
 			return callback();
 		}else{
-			return callback(new Error('请输入8～12位字符和数字'))
+			return callback(new Error('请输入6～8位字符和数字'))
 		}
 	},
 	// 手机号

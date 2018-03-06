@@ -1,9 +1,21 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 const fs = require('fs')
 const path = require('path')
 const route = require('./api')
 let app = express()
+
+// session 设置
+app.use(cookieParser())
+app.use(session({
+  secret: 'qjblog',
+  name:'qjblog',
+  cookie:{maxAge:604800}, //一周后过期
+  resave: false,
+  saveUninitialized: true
+}))
 
 //生成filePath的绝对路径
 const resolve = filePath => path.resolve(__dirname,filePath)

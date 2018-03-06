@@ -57,7 +57,16 @@ body{
 	input:focus, textarea:focus {
 		border-color: $link;
 	}
+	&:focus{
+		background: $mainColor !important;
+		border:1px solid $mainColor;
+	}
+	&:active {
+		background: $mainColor !important;
+		border:1px solid $mainColor;
+	}
 }
+
 .el-loading-spinner .path{
 	stroke: #a3bb50!important;
 }
