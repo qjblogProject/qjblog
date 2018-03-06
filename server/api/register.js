@@ -18,14 +18,14 @@ router.post('/register/ajax-register',(req,res) => {
 		if(!!result){
 			let mes = '';
 			if(result.exist){
-				mes = '用户名已存在';
+				json = commonFunc.formatJSON({},false,'用户名已存在',200);
 			}else if(result.serverStatus === 2){
-				mes = '注册成功';
 
 				//写入session
-				req.session.name = {'username':data.name};
+				req.session.username = data.name;
+				json = commonFunc.formatJSON({'name':data.name},true,'注册成功',200);
 			}
-			json = commonFunc.formatJSON({},true,mes,200);
+			
 		}else{
 			json = commonFunc.formatJSON({},false,'注册失败',4001);
 		}

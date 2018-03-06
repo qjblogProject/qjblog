@@ -11,7 +11,7 @@ const Store = new Vuex.Store({
     },
     modules:{
         base:baseModule,
-        home:homeModule
+        home:homeModule,
     }
 })
 

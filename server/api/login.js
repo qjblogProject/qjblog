@@ -18,7 +18,7 @@ router.post('/login/ajax-login',(req,res) => {
 
 		result.forEach(item => {
 			if(item.password === data.password){
-				json = commonFunc.formatJSON({},true,"登陆成功",200);
+				json = commonFunc.formatJSON({"name":data.name},true,"登陆成功",200);
 
 				//写入session
 				req.session.username = data.name;
