@@ -8,7 +8,7 @@ const commonFunc = require('../common/commonFunc.js')
 // 用户登录
 router.post('/login/ajax-login',(req,res) => {
 	const data = req.body;
-	db.login(data,(err,result)=>{
+	db.user.login(data,(err,result)=>{
 		let json = '';
 		result.forEach(item => {
 			if(item.password === data.password){
@@ -20,7 +20,6 @@ router.post('/login/ajax-login',(req,res) => {
 				json = commonFunc.formatJSON({},false,"登陆失败",4001);
 			}
 		})
-	    res.send(json)
 	})
 })
 
