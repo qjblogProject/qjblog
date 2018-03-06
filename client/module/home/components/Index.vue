@@ -1,7 +1,7 @@
 <template>
    <div id="home">
     	<header-component></header-component>
-		<container-component>
+		<container-component :have-right='true'>
 			<!--主页内容-->
 			<list-component slot='content'></list-component>
 			<!--主页右侧区域栏-->
