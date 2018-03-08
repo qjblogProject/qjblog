@@ -3,7 +3,7 @@ const apiIntercept = require('./common/apiIntercept')
 const login = require('./login')
 const register = require('./register')
 const home = require('./home')
-const articel = require('./articel')
+const article = require('./article')
 
 
 module.exports = (app)=>{
@@ -12,5 +12,5 @@ module.exports = (app)=>{
     app.use(login)
     app.use(register)
     app.use(home)
-    app.use(articel)
+    app.use(article)
 }
