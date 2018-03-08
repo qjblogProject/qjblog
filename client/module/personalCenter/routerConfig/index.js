@@ -1,5 +1,5 @@
 import Index from '../components/index'
-import ArticelEdit from '../components/articelEdit'
+import ArticleEdit from '../components/articleEdit'
 
 var metaData = {
     title:'个人中心'
@@ -13,7 +13,7 @@ export default [
     },
     {
         path: '/edit',
-        component:ArticelEdit,
+        component:ArticleEdit,
         meta: metaData           
     }
 ];

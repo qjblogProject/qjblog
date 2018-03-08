@@ -9,10 +9,7 @@
 <script>
 
 export default {
-  name: 'app',
-  deactivated(){
-    this.$destroy(); //默认不做先不做keep-alive
-  }
+  name: 'app'
 }
 </script>
 

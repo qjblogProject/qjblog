@@ -1,5 +1,5 @@
 <template>
-   <div class="articel-detail">
+   <div class="article-detail">
     	gggg
     </div>
 </template>

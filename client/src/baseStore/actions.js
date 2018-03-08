@@ -1,5 +1,4 @@
 import Vue from 'vue';
-console.log(Vue)
 
 //获取窗口高度
 export const setWinHeight = ({commit}) => {

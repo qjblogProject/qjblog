@@ -7,7 +7,7 @@
         </p>
         <p class='blog-title'>薪人薪事博客平台</p>
         <ul class='nav clearfix'>
-            <li :class='{active:activeNav=="home"}'>首页</li>
+            <li :class='{active:activeNav=="home"}' @click='$router.push("/")'>首页</li>
             <li :class='{active:activeNav=="personal"}' @click='$router.push("/personal")'>个人主页</li>
             <li :class='{active:activeNav=="about"}'><a href='//www.xinrenxinshi.com' target='_blank'>关于我们</a></li>
         </ul>

@@ -23,6 +23,9 @@ export default {
 		'footer-component':footerComponent,
 		'container-component':containerComponent,
 		'personal-component':personalContent
+	},
+	deactivated(){
+		this.$destroy(); //默认不做先不做keep-alive
 	}
 }
 

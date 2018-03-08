@@ -1,4 +1,4 @@
-import Detail from '../components/articelDetail'
+import Detail from '../components/articleDetail'
 
 var metaData = {
     title:'文章详情'
@@ -6,7 +6,7 @@ var metaData = {
 
 export default [
     {
-        path: '/articel/detail',
+        path: '/article/detail',
         component:Detail,
         meta: metaData           
     }
