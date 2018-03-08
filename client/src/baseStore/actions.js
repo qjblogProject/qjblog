@@ -21,7 +21,7 @@ export const setRegUser = ({commit},postData)=> {
 		}).then(res => {
 			let result = res.data;
 			if(result.status){
-				commit('updateUser',result.data);
+				commit('updateUserInfo',result.data);
 			}
 			resolve(result);
 		})
@@ -38,9 +38,24 @@ export const setLoginUser = ({commit},postData) => {
 		}).then((res)=>{
 			let result = res.data;
 			if(result.status){
-				commit('updateUser',result.data);
+				commit('updateUserInfo',result.data);
 			}
 			resolve(result);
+		})
+	})
+}
+
+export const getUserInfo = function({commit}){
+	return new Promise((resolve) => {
+		Vue.prototype.$http({
+			url:'/home/ajax-get-basic-info',
+			method:'post',
+		}).then((res) => {
+			let result = res.data;
+			if(result.status) {
+				commit('updateUserInfo',result.data)
+			}
+			resolve(result)
 		})
 	})
 }

@@ -1,12 +1,16 @@
 //此处引入api下的api文件
+const apiIntercept = require('./common/apiIntercept')
 const login = require('./login')
 const register = require('./register')
-const article = require('./article')
+const home = require('./home')
+const articel = require('./articel')
 
 
 module.exports = (app)=>{
     //在此处做app.use(api)
+    app.use(apiIntercept)
     app.use(login)
     app.use(register)
-    app.use(article)
+    app.use(home)
+    app.use(articel)
 }

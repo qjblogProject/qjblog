@@ -2,6 +2,6 @@ export const setWinHeight = (state,winHeight) => {
     state['winHeight'] = winHeight;
 }
 
-export const updateUser = (state,data) => {
-	state['user'] = data.name;
+export const updateUserInfo = (state,data) => {
+	state.userInfo['name'] = data.name;
 }

@@ -8,7 +8,7 @@ export default [
     {
         path: '/',
         redirect:'/home',
-        meta: metaData           
+        meta: metaData        
     },
     {
         path: '/home',

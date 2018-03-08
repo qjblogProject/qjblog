@@ -1,6 +1,6 @@
 <template>
    <div id="home">
-    	<header-component :user="user"></header-component>
+    	<header-component :user="userInfo.name"></header-component>
 		<container-component :have-right='true'>
 			<!--主页内容-->
 			<list-component slot='content'></list-component>
@@ -40,6 +40,10 @@ import tagCategoryComponent from 'components/common/tagCategory'
 import searchComponent from 'components/common/search'
 import dateCategoryComponent from 'components/common/dateCategory'
 export default {
+	beforeCreate(){
+		const t = this;
+		t.$store.dispatch('base/getUserInfo')
+	},
 	data(){
 		return {
 			tagList:[{name:'html',id:1},{name:'css',id:2},{name:'java',id:3},{name:'php',id:4},{name:'canvs',id:5},{name:'sql',id:6}],
@@ -89,7 +93,7 @@ export default {
 	},
 	computed: {
 		...mapGetters('base',{
-			'user':'getUser'
+			'userInfo':'getUserInfo'
 		})
 	},
 	methods:{

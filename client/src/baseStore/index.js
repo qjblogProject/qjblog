@@ -6,7 +6,9 @@ export const baseModule = {
     namespaced: true,
     state:{
         winHeight:400,
-        user:''
+        userInfo:{
+        	name:''
+        }
     },
     actions,
     mutations,
