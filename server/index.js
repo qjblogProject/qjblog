@@ -12,7 +12,7 @@ app.use(cookieParser())
 app.use(session({
   secret: 'qjblog',
   name:'qjblog',
-  cookie:{maxAge:604800}, //一周后过期
+  cookie:{maxAge:1000*60*120}, //两个小时候失效
   resave: false,
   saveUninitialized: true
 }))

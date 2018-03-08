@@ -4,6 +4,6 @@ export const getWinHeight = (state) => {
 }
 
 //获取登陆用户
-export const getUser = (state) => {
-	return state.user;
+export const getUserInfo = (state) => {
+	return state.userInfo;
 }

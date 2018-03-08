@@ -1,6 +1,7 @@
 
 import axios from 'axios';
 import qs from 'qs';
+import {setLastAPITime} from 'assets/js/commonFunc';
 
 export default (store,router,callBack) => {
     // axios request 拦截器
@@ -19,7 +20,14 @@ export default (store,router,callBack) => {
 
     // axios response拦截器
     axios.interceptors.response.use((res) => {
-
+        setLastAPITime();
+        // 登录状态
+        if (res.data.status == false && res.data.code == 4001) {
+            // 无登录状态, from 方便登录后 回到当前页面
+            window.location.href = 'login';
+            return;
+        }
+        
         return Promise.resolve(res);
     }, (error) => {
         
@@ -29,7 +37,7 @@ export default (store,router,callBack) => {
     router.beforeEach(async (to, from, next) => {
         //设置页面的title
         document.title = to.matched[0].meta.title || '';
-        store.dispatch('base/setWinHeight')
+        store.dispatch('base/setWinHeight');
         next();
     });
 }

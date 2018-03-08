@@ -9,7 +9,7 @@ module.exports = {
     },
     register(data,callback){
         const select_sql = `select * from user where name='${data.name}'`;
-        const insert_sql = `insert into user(name,password,email,mobile,add_time,modi_time) values('${data.name}','${data.password}','${data.email}',${data.mobile},${data.time},${data.time})`;
+        const insert_sql = `insert into user(name,password,email,mobile,addTime,modiTime) values('${data.name}','${data.password}','${data.email}',${data.mobile},${data.time},${data.time})`;
         // 查询用户名是否重复
         query(select_sql,(err,select_result)=>{
             if(!select_result.length){

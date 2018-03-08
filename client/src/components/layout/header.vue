@@ -2,6 +2,7 @@
     <div class="header-wrap">
         <p class='top-text'>
             <a href="javascript;" v-if="!!user">欢迎{{user}}</a>
+            <a v-else>未登录{{user}}</a>
             <a href="/login">sign up</a>
             <a href="/register">sign in</a>
         </p>
