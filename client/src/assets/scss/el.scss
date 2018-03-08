@@ -1,4 +1,4 @@
-$mainColor:#0e5e45;
+$mainColor:#a3bb51;
 $textViceHeaderColor: #9e9ea6;
 $link:#409EFF;
 $mainHoverColor:rgba(14,94,69,0.2);
@@ -20,6 +20,31 @@ body{
 // 	}
 // }
 
+.el-tabs{
+	.el-tabs__active-bar{
+		background: $mainColor;
+	}
+	.el-tabs__item{
+		width:120px;
+		text-align: center;
+	}
+	.el-tabs__item{
+		&.is-active{
+			color:$mainColor;
+		}
+		&:hover{
+			color:$mainColor;
+		}
+	}
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover>td{
+	background: lighten($mainColor, 42%);
+}
+.el-table th, .el-table tr:last-child td{
+	border:none;
+}
+
 .el-input.qj-input, .el-select.qj-select, .qj-input.el-textarea{
 	input, textarea {
 		border-radius: 3px;
@@ -40,4 +65,8 @@ body{
 		background: $mainColor !important;
 		border:1px solid $mainColor;
 	}
+}
+
+.el-loading-spinner .path{
+	stroke: #a3bb50!important;
 }

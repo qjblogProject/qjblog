@@ -1,3 +1,4 @@
+import Index from '../components/index'
 import ArticelEdit from '../components/articelEdit'
 
 var metaData = {
@@ -5,6 +6,11 @@ var metaData = {
 }
 
 export default [
+    {
+        path: '/personal',
+        component:Index,
+        meta: metaData           
+    },
     {
         path: '/edit',
         component:ArticelEdit,
