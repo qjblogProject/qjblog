@@ -14,4 +14,17 @@ router.post('/home/ajax-get-basic-info',(req,res) => {
 	res.send(json);
 })
 
+//获取首页的文章列表
+router.post('/home/ajax-get-article-list',(req,res) => {
+	let data = req.data;
+	db.home.getArticleList(data,(err,result)=>{
+        if(err){
+            res.status(500).send({message:err,status:0,code:500}); 
+            return;
+        }
+        res.status(200).send({message:'获取文章列表成功',status:0,code:200,data:result});
+        
+    })
+})
+
 module.exports = router

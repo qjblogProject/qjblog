@@ -7,10 +7,10 @@
                 <p class='text user-email'>1234567@qq.com</p>
             </div>
             <ul class='operation clearfix'>
-                <router-link to='edit' tag='li' class='fl edit'>
+                <li class='fl edit' @click='handleToEdit'>
                     <i class='icon icon-edit'></i>
                     <span>写文章</span>
-                </router-link>
+                </li>
                 <router-link to='set' tag='li' class='fl set'>
                     <i class='icon icon-set'></i>
                     <span>设置</span>
@@ -20,10 +20,25 @@
     </div>
 </template>
 <script>
+import {mapMutations} from 'vuex'
 export default {
-  data(){
-      return {}
-  }
+    data(){
+        return {}
+    },
+    methods:{
+        ...mapMutations('article',{
+            setArticleData:'setArticleData'
+        }),
+        handleToEdit(){
+            let t = this;
+            //存储当前文章信息到store
+            t.setArticleData({
+                articleId:'',
+                draftId:''
+            })
+            t.$router.push('edit')
+        }
+    }
 }
 </script>
 

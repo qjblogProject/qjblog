@@ -5,7 +5,10 @@ import * as getters from './getters'
 export const articleModule = {
     namespaced: true,
     state:{
-        articleData:''
+        articleData:{
+            articleId:'',
+            draftId:'',
+        }
     },
     actions,
     mutations,

@@ -7,15 +7,15 @@ module.exports = {
         const time = new Date().getTime();
         let sql = '';
         if(data.articleId){
-            sql = `update article set title= '${data.title}', content = '${data.content}',modiTime= ${time} where id = ${data.articleId}`;
+            sql = `update article set title= '${data.title}', abstract='${data.abstract}',content = '${data.content}',modiTime= ${time} where id = ${data.articleId}`;
         }else{
-            sql = `insert into article(title,userId,content,addTime,modiTime) values('${data.title}',${data.userId},'${data.content}',${time},${time})`;
+            sql = `insert into article(title,userId,abstract,content,addTime,modiTime) values('${data.title}',${data.userId},'${data.abstract}','${data.content}',${time},${time})`;
         }
         query(sql,(err,result) => {
-            if(!err && data.articleId){
-                const dsql = `delete from article_draft where articleId=${data.articleId}`
+            if(!err && data.draftId){
+                const dsql = `delete from article_draft where id=${data.draftId}`
                 query(dsql,(err1,result1)=>{
-                    callback(err1,result1)
+                    callback(err1,result)
                 })
             }else{
                 callback(err,result)
@@ -26,12 +26,12 @@ module.exports = {
     //保存草稿
     addArticleDraft(data,callback){
         const time = new Date().getTime();
-        const articleId = data.articleId || 0;
+        const articleId = data.articleId || null;
         let sql = '';
         if(data.draftId){
-            sql = `update article_draft set title='${data.title}',content='${data.content}',modiTime=${time} where id=${data.draftId}`
+            sql = `update article_draft set title='${data.title}',abstract='${data.abstract}',content='${data.content}',modiTime=${time} where id=${data.draftId}`
         }else{
-            sql = `insert into article_draft(articleId,title,userId,content,addTime,modiTime) values(${articleId},'${data.title}',${data.userId},'${data.content}',${time},${time})`;
+            sql = `insert into article_draft(articleId,title,userId,abstract,content,addTime,modiTime) values(${articleId},'${data.title}',${data.userId},'${data.abstract}','${data.content}',${time},${time})`;
         }
         query(sql,(err,result) => {
     		callback(err,result)
@@ -70,20 +70,21 @@ module.exports = {
             }
     	})
     },
+    //获取编辑详情
     getArticleEditDetail(data,callback){
         let sql = '';
         if(data.draftId){
             //查找article_draft表的详情,用于编辑草稿
-            sql = `select id as draftId,articleId,title,content from article_draft where id=${data.draftId}`;
+            sql = `select id as draftId,articleId,title,abstract,content from article_draft where id=${data.draftId}`;
             query(sql,(err,result)=>{
                 callback(err,result)
             })
         }else if(data.articleId){
             //查找article表的详情
-            sql = `select id as articleId,title,content from article where id=${data.articleId}`;
+            sql = `select id as articleId,title,abstract,content from article where id=${data.articleId}`;
             query(sql,(err,result)=>{
                 if(result.length > 0){
-                    const sql1 = `select id as draftId,articleId,title,content from article_draft where articleId=${result[0].articleId}`
+                    const sql1 = `select id as draftId,articleId,title,abstract,content from article_draft where articleId=${result[0].articleId}`
                     query(sql1,(err1,result1)=>{
                         if(result1.length > 0){
                             callback(err1,result1)

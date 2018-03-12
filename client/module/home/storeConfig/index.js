@@ -5,7 +5,12 @@ import * as getters from './getters'
 export const homeModule = {
     namespaced: true,
     state:{
-        
+        tableList:[],
+        filterContent:{
+            keywords:'',
+            tags:[],
+            publishTime:''
+        }
     },
     actions,
     mutations,

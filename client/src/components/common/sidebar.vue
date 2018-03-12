@@ -18,7 +18,7 @@ export default {
 <style lang='scss'>
 .sidebar{
     position: fixed;
-    right: 10%;
+    right: 5%;
     top: 90px;
     padding-top: 10px;
     width: 290px;

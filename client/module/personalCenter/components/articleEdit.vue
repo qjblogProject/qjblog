@@ -3,7 +3,6 @@
 		<div class='edit-menu clearfix'>
 			<p class='menu-title fl'>
 				文章编辑
-				{{articleData}}
 				<span class='error-text'>{{errorText}}</span>
 			</p>
 			<p class='btn-group fr'>
@@ -18,8 +17,14 @@
 					<el-input class='qj-input' v-model.trim="title" placeholder="请输入文章标题"></el-input>
 				</el-col>
 			</el-row>
+			<el-row class='article-abstract'>
+				<label class='fl'>摘要</label>
+				<el-col :span='15'>
+					<el-input class='qj-input' type='textarea' v-model.trim="abstract" placeholder="请输入文章摘要"></el-input>
+				</el-col>
+			</el-row>
 			<div id='editorHead' class='editor-head'></div>
-			<div id='editor' :style='{"height":winHeight-240+"px"}'></div>
+			<div id='editor' :style='{"height":winHeight-330+"px"}'></div>
 		</div>
     </div>
 </template>
@@ -35,6 +40,7 @@ export default {
 			articleId:'',
 			draftId:'',
 			title:'',
+			abstract:'',
 			content:'',
 			errorText:''
 		}
@@ -49,7 +55,7 @@ export default {
 	},
 	created(){
 		//articleData存在则是编辑，需要获取详情回填
-		if(this.articleData){
+		if(this.articleData.articleId || this.articleData.draftId){
 			this.getArticleEditDetail();
 		}
 	},
@@ -82,6 +88,7 @@ export default {
 				}
 				let data = res.data;
 				t.title = data.title;
+				t.abstract = data.abstract;
 				t.content = data.content;
 				t.articleId = data.articleId;
 				t.draftId = data.draftId;
@@ -102,6 +109,7 @@ export default {
 					articleId:t.articleId,
 					draftId:t.draftId,
 					title:t.title,
+					abstract:t.abstract,
 					content:t.content
 				}
 			//ajax请求，保存文章
@@ -116,6 +124,7 @@ export default {
 					return;
 				}
 				t.articleId = data.data.articleId;
+				t.draftId = '';
 				t.$message.success({type:'success',message:data.message})
 			})
 		},
@@ -133,6 +142,7 @@ export default {
 					articleId:t.articleId,
 					draftId:t.draftId,
 					title:t.title,
+					abstract:t.abstract,
 					content:t.content
 				}
 			
@@ -201,7 +211,7 @@ export default {
 		padding-right: 10%;
 		background: #fff;
 		box-shadow: 0 1px 3px #e0e0e0;
-		.article-title{
+		.article-title,.article-abstract{
 			padding: 40px 0 10px;
 			label{
 				width: 100px;
@@ -216,7 +226,9 @@ export default {
 				height: 16px;
 				border-left: solid 1px #e0e0e0;
 			}
-			
+		}
+		.article-abstract{
+			padding-top: 20px;
 		}
 		.editor-head{
 			margin: 20px auto 0;

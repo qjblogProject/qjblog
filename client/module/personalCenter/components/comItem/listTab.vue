@@ -18,7 +18,7 @@
                 label="更新时间"
                 width='120'>
                 <template slot-scope="scope">
-                    <span>{{DateFormate(new Date(scope.row.modiTime),'yyyy-mm-dd')}}</span>
+                    <span>{{DateFormate(new Date(scope.row.modiTime),'yyyy-MM-dd')}}</span>
                 </template>
             </el-table-column>
             <el-table-column
@@ -27,7 +27,7 @@
                 v-if='type!="draft"'
                 width='120'>
                 <template slot-scope="scope">
-                    <span v-if='scope.row.publishTime'>{{DateFormate(new Date(scope.row.publishTime),'yyyy-mm-dd')}}</span>
+                    <span v-if='scope.row.publishTime'>{{DateFormate(new Date(scope.row.publishTime),'yyyy-MM-dd')}}</span>
                     <span v-else></span>
                 </template>
             </el-table-column>
@@ -60,7 +60,7 @@
                 <template slot-scope="scope">
                     <span class='edit' @click='handleEditArticle(scope.row)'>编辑</span>
                     <span class='publish' @click='handlePublish(scope.row)' v-if='type != "draft" && scope.row.status==0'>发表</span>
-                    <span class='tag-set' v-if='type != "draft"'>标签设置</span>
+                    <span class='tag-set' v-if='type != "draft"'>标签</span>
                 </template>
             </el-table-column>
         </el-table>

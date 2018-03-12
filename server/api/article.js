@@ -82,7 +82,7 @@ router.post('/article/ajax-get-personal-article-list',(req,res) => {
     })
 })
 
-//获取文章详情
+//获取文章编辑详情
 router.post('/article/ajax-get-article-edit-detail',(req,res) => {
     let data = req.body;
 
