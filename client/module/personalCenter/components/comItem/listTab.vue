@@ -5,7 +5,8 @@
             style="width: 100%">
             <el-table-column
                 prop="title"
-                label="文章标题">
+                label="文章标题"
+                :show-overflow-tooltip='true'>
             </el-table-column>
             <el-table-column
                 prop="name"
@@ -42,21 +43,38 @@
             <el-table-column
                 prop="categoryId"
                 label="标签分类"
-                v-if='type!="draft"'>
+                v-if='type!="draft"'
+                :show-overflow-tooltip='true'>
                 <template slot-scope="scope">
-                    <span>{{scope.row.categoryId||""}}</span>
+                    <span v-if='scope.row.tags' 
+                        class='category-tag'>
+                        {{tagsName(scope.row.tags)}}
+                    </span>
+                    <span v-else></span>
                 </template>
             </el-table-column>
             <el-table-column
-                prop=""
-                label="操作">
+                prop="articleId"
+                label="操作"
+                width='170'>
                 <template slot-scope="scope">
-                    <span class='publish' v-if='type != "draft" && scope.row.status==0'>发表</span>
                     <span class='edit' @click='handleEditArticle(scope.row)'>编辑</span>
-                    <span class='tag-set'>标签设置</span>
+                    <span class='publish' @click='handlePublish(scope.row)' v-if='type != "draft" && scope.row.status==0'>发表</span>
+                    <span class='tag-set' v-if='type != "draft"'>标签设置</span>
                 </template>
             </el-table-column>
         </el-table>
+        <el-dialog
+            title="发表文章"
+            :visible.sync="publishDialogVisible"
+            width="40%"
+            class='publish-dialog'>
+            <p class='dialog-text'>确认要发表文章 {{publishTitle}} 吗？</p>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="publishDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="handleConfirmPublish">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -65,7 +83,11 @@ import {DateFormater} from 'assets/js/commonFn'
 export default {
     props:['dataList','type'],
     data(){
-        return {}
+        return {
+            publishDialogVisible:false,
+            publishTitle:'',
+            publishId:''
+        }
     },
     methods:{
         ...mapMutations('article',{
@@ -83,6 +105,38 @@ export default {
                 draftId:row.draftId || ''
             })
             t.$router.push('edit')
+        },
+        //发表文章
+        handlePublish(row){
+            this.publishId = row.articleId;
+            this.publishTitle = row.title;
+            this.publishDialogVisible = true;
+        },
+        //确认发表
+        handleConfirmPublish(){
+            let t = this;
+            t.$http({
+                url:'/article/ajax-publish-article',
+                method:'post',
+                data:{
+                    id:t.publishId
+                }
+            }).then((res)=>{
+                let data = res.data;
+                if(!data.status){
+                    t.$message.error(data.message);
+                    return;
+                }
+                t.publishDialogVisible = false;
+                t.$message.success({type:'success',message:data.message});
+            })
+        },
+        tagsName(tags){
+            let list = [];
+            for(let tag of tags){
+                list.push(tag.name)
+            }
+            return list.join(',')
         }
     }
     
@@ -92,15 +146,23 @@ export default {
 .article-list{
     .publish,.tag-set,.edit{
         cursor: pointer;
+        padding: 0 4px;
     }
     .publish{
-        color:#ccc;
+        color:#43d480;
     }
     .tag-set{
-        color:#ccc;
+        color:#0f88eb;
     }
     .edit{
-        color:#ccc;
+        color:#ffcf01;
+    }
+    
+}
+.publish-dialog{
+    .dialog-text{
+        text-align: center;
     }
 }
+
 </style>

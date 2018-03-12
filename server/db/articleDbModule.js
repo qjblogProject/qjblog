@@ -37,18 +37,37 @@ module.exports = {
     		callback(err,result)
     	})
     },
+    //发表文章
+    publishArticle(data,callback){
+        const time = new Date().getTime();
+        const id = data.id;
+        const sql = `update article set status=1,publishTime=${time}, modiTime=${time} where id=${id}`
+        query(sql,(err,result) => {
+    		callback(err,result)
+    	})
+    },
     //获取个人文章列表
     getPersonalArticleList(data,callback){
         const tableName = data.type == 'draft' ? 'article_draft' : 'article';
         const status = data.type != 'draft' &&  data.type == 'publish' ? 1 : 0; 
         let sql = `select a.id as articleId,a.title,a.status,a.categoryId,a.modiTime,a.publishTime,b.name from ${tableName} a,user b where a.userId=${data.userId} and a.userId=b.id`;
+        let sqlTag = `select id,name from category`;
         if(data.type == 'publish' || data.type == 'nopublish'){
             sql += ` and status=${status}`;
         }else if(data.type == 'draft'){
             sql = `select a.id as draftId,a.articleId,a.title,a.modiTime,b.name from ${tableName} a,user b where a.userId=${data.userId} and a.userId=b.id`;
         }
         query(sql,(err,result) => {
-    		callback(err,result)
+            if(!err && data.type!='dratf'){
+                query(sqlTag,(err1,result1)=>{
+                    callback(err1,{
+                        list:result,
+                        tags:result1
+                    })
+                })
+            }else{
+                callback(err,result)
+            }
     	})
     },
     getArticleEditDetail(data,callback){

@@ -30,6 +30,23 @@ router.post('/article/ajax-save-article-draft',(req,res) => {
     })
 })
 
+//发表文章
+router.post('/article/ajax-publish-article',(req,res) => {
+    let data = req.body;
+    if(!data.id){
+        res.status(500).send({message:'发表id为空',status:0,code:500});
+        return;
+    }
+    db.article.publishArticle(data,(err,result)=>{
+        if(err){
+            res.status(500).send({message:err,status:0,code:500}); 
+            return;
+        }
+        res.status(200).send({message:'文章发表成功成功',status:1,code:200,data:{}});
+    })
+})
+
+
 //获取文章列表
 router.post('/article/ajax-get-personal-article-list',(req,res) => {
     let data = req.body;
@@ -39,8 +56,29 @@ router.post('/article/ajax-get-personal-article-list',(req,res) => {
             res.status(500).send({message:err,status:0,code:500}); 
             return;
         }
+        let {list,tags=[]} = result;
+        let tagsMap = {};
+        //处理tag数据格式为id:name,
+        tags.map((item)=>{
+            tagsMap[item.id] = item.name;
+        })
+        //对数据做标签匹配（草稿列表不用）
+        if(data.type != 'draft'){
+            list.map((item)=>{
+                if(item.categoryId){
+                    const tagsTemp = item.categoryId.split(',');
+                    let tags = [];
+                    for(let elem of tagsTemp){
+                        tags.push({id:elem,name:tagsMap[elem]})
+                    }
+                    item.tags = tags;
+                }else{
+                    return item.tags = [];
+                }
+            })
+        }
         
-        res.status(200).send({message:'获取成功',status:1,code:200,data:result});
+        res.status(200).send({message:'获取成功',status:1,code:200,data:list});
     })
 })
 

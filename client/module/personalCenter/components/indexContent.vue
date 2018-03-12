@@ -111,7 +111,7 @@ export default {
             right: 30px;
             li{
                 cursor: pointer;
-                font-size: 12px;
+                font-size: 14px;
                 color:#999;
                 margin-left: 10px;
                 line-height: 30px;
