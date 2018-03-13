@@ -1,6 +1,7 @@
 <template>
    <div class="container" :class='{"have-right":haveRight}' :style='{"min-height":(winHeight-90-24)+"px"}'>
-    	<slot name='content'></slot>
+    	<slot name='filterResult'></slot>
+        <slot name='content'></slot>
         <slot name='sidebar'></slot>
     </div>
 </template>

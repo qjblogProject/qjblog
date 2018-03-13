@@ -9,7 +9,7 @@ export const getTableList = ({commit,state})=>{
     }).then((res)=>{
         let data = res.data;
         commit('setTableList',data.data)
-        
+        commit('setTotalCount',data.count)
         return data
     })
 }
@@ -26,10 +26,15 @@ export const getDateList = ({commit})=>{
     })
 }
 export const updateFilterContent = ({commit,dispatch},filter)=>{
-    console.log(filter)
     //更新filterContent
     commit('updateFilterContent',filter)
     //重新请求数据
     dispatch('getTableList')
-    
+}
+
+export const clearFilter = ({commit,dispatch})=>{
+    //更新filterContent
+    commit('clearFilterContent')
+    //重新请求数据
+    dispatch('getTableList')
 }

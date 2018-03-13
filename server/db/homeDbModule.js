@@ -31,7 +31,6 @@ module.exports = {
         if(flag){
             sql += ` limit 8` 
         }
-
         query(sql,(err,result)=>{
             callback(err,result)
         })

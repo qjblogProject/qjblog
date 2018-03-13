@@ -2,6 +2,13 @@
    <div id="home">
     	<header-component :user="userInfo.name"></header-component>
 		<container-component :have-right='true'>
+			<!--筛选结果-->
+			<filter-result 
+				v-if='filterContent.keywords || filterContent.publishTime || filterContent.tags.length > 0' 
+				slot='filterResult' 
+				:totalCount='totalCount' 
+				:filterContent='filterContent'
+				@handleClearFilter='handleClearFilter'></filter-result>
 			<!--主页内容-->
 			<list-component slot='content'></list-component>
 			<!--主页右侧区域栏-->
@@ -42,6 +49,7 @@ import operationComponent from 'components/common/operation'
 import tagCategoryComponent from 'components/common/tagCategory'
 import searchComponent from 'components/common/search'
 import dateCategoryComponent from 'components/common/dateCategory'
+import filterResult from 'components/common/filterResult'
 export default {
 	beforeCreate(){
 		const t = this;
@@ -101,7 +109,8 @@ export default {
 		}),
 		...mapGetters('home',{
 			dateList:'getDateList',
-			filterContent:'getFilterContent'
+			filterContent:'getFilterContent',
+			totalCount:'getTotalCount'
 		})
 	},
 	methods:{
@@ -109,23 +118,31 @@ export default {
 
 		},
 		//关键字搜索
-		handleSeach(val){
-			console.log(val)
+		handleSeach(newVal,oldVal){
+			if(newVal == oldVal){
+				return;
+			}
+			this.updateFilterContent('keywords','update',newVal)
 		},
 		//日期筛选
 		handleCollapseHead(dataKey){
 			this.updateFilterContent('publishTime','update',dataKey)
 		},
-		//日起归档下的文章项事件
+		//日起归档下的文章项事件,去文章详情页
 		handleArticleItem(id){
 			console.log(id)
 		},
+		//更新store filterContent数据
 		updateFilterContent(key,type,value){
 			this.$store.dispatch('home/updateFilterContent',{
 				key,
 				type,
 				value
 			})
+		},
+		//清空所有筛选
+		handleClearFilter(){
+			this.$store.dispatch('home/clearFilter')
 		}
 	},
 	components:{
@@ -137,7 +154,8 @@ export default {
 		'operation-component':operationComponent,
 		'tag-category-component':tagCategoryComponent,
 		'search-component':searchComponent,
-		'date-category-component':dateCategoryComponent
+		'date-category-component':dateCategoryComponent,
+		'filter-result':filterResult
 	},
 	deactivated(){
 		this.$destroy(); //默认不做先不做keep-alive

@@ -64,7 +64,7 @@ router.post('/home/ajax-get-article-list',(req,res) => {
             res.status(500).send({message:err,status:0,code:500}); 
             return;
         }
-        res.status(200).send({message:'获取文章列表成功',status:0,code:200,data:result});
+        res.status(200).send({message:'获取文章列表成功',status:0,code:200,data:result,count:result.length});
         
     })
 })
