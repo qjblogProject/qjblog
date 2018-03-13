@@ -6,6 +6,7 @@ export const homeModule = {
     namespaced: true,
     state:{
         tableList:[],
+        dateList:[],
         filterContent:{
             keywords:'',
             tags:[],

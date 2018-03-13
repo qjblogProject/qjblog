@@ -24,7 +24,7 @@
             <el-table-column
                 prop="modiTime"
                 label="发表时间"
-                v-if='type!="draft"'
+                v-if='type=="all" || type=="publish"'
                 width='120'>
                 <template slot-scope="scope">
                     <span v-if='scope.row.publishTime'>{{DateFormate(new Date(scope.row.publishTime),'yyyy-MM-dd')}}</span>

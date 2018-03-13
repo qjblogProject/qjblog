@@ -21,18 +21,12 @@ export default {
 		'list-item':listItem
 	},
 	created(){
-		this.handleGetTableList();
+		this.getTableList();
 	},
 	methods:{
 		...mapActions('home',{
 			getTableList:'getTableList'
-		}),
-		handleGetTableList(){
-			let t = this;
-			t.getTableList().then((res)=>{
-
-			})
-		}
+		})
 	}
 
 }

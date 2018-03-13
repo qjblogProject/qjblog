@@ -10,6 +10,26 @@ export const getTableList = ({commit,state})=>{
         let data = res.data;
         commit('setTableList',data.data)
         
-        return res
+        return data
     })
+}
+//获取右侧时间数据
+export const getDateList = ({commit})=>{
+    let t = this;
+    Vue.$http({
+        url:'/home/ajax-get-dateMonth-list',
+        method:'post'
+    }).then((res)=>{
+        let data = res.data;
+        commit('setDateList',data.data)
+        return data
+    })
+}
+export const updateFilterContent = ({commit,dispatch},filter)=>{
+    console.log(filter)
+    //更新filterContent
+    commit('updateFilterContent',filter)
+    //重新请求数据
+    dispatch('getTableList')
+    
 }

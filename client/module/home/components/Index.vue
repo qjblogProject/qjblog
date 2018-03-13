@@ -15,12 +15,15 @@
 					@click='clickH'>
 				</tag-category-component>
 				<!--关键字搜索组建-->
-				<search-component slot='search'></search-component>
+				<search-component slot='search' 
+					:value='filterContent.keywords'
+					@handleSeach='handleSeach'></search-component>
 				<!--时间分类组建-->
 				<date-category-component
 					slot='dateCategory'
-					:dataList='dateCategoryList'
-					@handleCollapseHead='handleCollapseHead'>
+					:dataList='dateList'
+					@handleCollapseHead='handleCollapseHead'
+					@handleArticleDetail='handleArticleItem'>
 				</date-category-component>
 			</sidebar-component>
 		</container-component>
@@ -43,6 +46,7 @@ export default {
 	beforeCreate(){
 		const t = this;
 		t.$store.dispatch('base/getUserInfo')
+		t.$store.dispatch('home/getDateList')
 	},
 	data(){
 		return {
@@ -94,14 +98,34 @@ export default {
 	computed: {
 		...mapGetters('base',{
 			'userInfo':'getUserInfo'
+		}),
+		...mapGetters('home',{
+			dateList:'getDateList',
+			filterContent:'getFilterContent'
 		})
 	},
 	methods:{
 		clickH(id){
 
 		},
+		//关键字搜索
+		handleSeach(val){
+			console.log(val)
+		},
+		//日期筛选
 		handleCollapseHead(dataKey){
-
+			this.updateFilterContent('publishTime','update',dataKey)
+		},
+		//日起归档下的文章项事件
+		handleArticleItem(id){
+			console.log(id)
+		},
+		updateFilterContent(key,type,value){
+			this.$store.dispatch('home/updateFilterContent',{
+				key,
+				type,
+				value
+			})
 		}
 	},
 	components:{

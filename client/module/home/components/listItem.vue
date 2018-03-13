@@ -18,7 +18,6 @@ export default {
     },
     methods:{
         DateFormate(date,ymd){
-            console.log(date)
             return DateFormater(date,ymd)
         }
     }

@@ -185,9 +185,10 @@ export default {
 		z-index: 100;
 		top: 0;
 		box-shadow: 0 1px 3px #e0e0e0;
+		border-top: #a3bb51 solid 4px;
 		width: 100%;
 		padding: 0 10%;
-		height: 50px;
+		height: 54px;
 		background: #fff;
 		.menu-title{
 			line-height: 50px;

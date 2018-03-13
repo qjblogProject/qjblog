@@ -3,14 +3,15 @@
         <collapse-component v-for='groupItem in dataList' 
             :title='groupItem.groupName+"("+groupItem.count+")"'
             :key='groupItem.date'
-            :dataKey='groupItem.date'
+            :dataKey='groupItem.min+","+groupItem.max'
             @handleCollapseHead='handleCollapseHead'>
-            <ul class='article-list'>
+            <ul class='article-date-list'>
                 <li v-for='articleItem in groupItem.articleList' 
                     :key='articleItem.id'
+                    :title='articleItem.title'
                     @click='handleArticleItem(articleItem.id)'
-                    class='article-item'>
-                    {{articleItem.name}}
+                    class='article-item ellipsis'>
+                    {{articleItem.title}}
                 </li>
             </ul>
         </collapse-component>
@@ -34,7 +35,7 @@ export default {
     },
     methods:{
         handleArticleItem(id){
-            this.$emit('handleArticle',id)
+            this.$emit('handleArticleDetail',id)
         },
         handleCollapseHead(dataKey){
             this.$emit('handleCollapseHead',dataKey)
@@ -53,10 +54,17 @@ export default {
     border-radius: 4px;
     box-shadow: 0 0 4px#eee;
     background: #fff;
-    .article-list{
-        padding-left: 20px;
+    .collapse-header{
+        cursor: pointer;
+        span:hover{
+            color:#a3bb51;
+        }
+    }
+    .article-date-list{
+        padding-left: 15px;
         .article-item{
             cursor: pointer;
+            width: 90%;
             font-size: 14px;
             line-height: 22px;
             color:#999;

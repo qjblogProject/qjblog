@@ -3,7 +3,8 @@
         <el-input 
             placeholder="请输入搜索标题／作者"
             prefix-icon="el-icon-search"
-            v-model="kewords">
+            v-model="kewords"
+            @keyup.enter="handlerTriggerSearch">
         </el-input>
         <i v-if='kewords' @click='handleClearSeach' class='icon icon-delete6'></i>
     </div>
@@ -11,6 +12,12 @@
 
 <script>
 export default {
+    props:{
+        value:{
+            type:String,
+            default:''
+        }
+    },
 	data(){
 		return {
             kewords:''
@@ -20,11 +27,11 @@ export default {
         handleClearSeach(){
             let t = this;
             t.kewords = '';
-            t.$emit('handleClearSeach',t.kewords)
+            t.$emit('handleSeach',t.kewords)
         },
-        handleSeach(){
+        handlerTriggerSearch(){
             let t = this;
-            this.$emit('handleClearSeach',t.kewords)
+            this.$emit('handleSeach',t.kewords)
         }
     }
 }
