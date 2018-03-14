@@ -70,3 +70,58 @@ body{
 .el-loading-spinner .path{
 	stroke: #a3bb50!important;
 }
+
+
+div.el-dialog {
+    padding: 0 20px;
+
+    .el-dialog__header {
+        padding: 0;
+        height: 50px;
+        border-bottom: 1px solid rgb(238, 236, 236);
+        color: rgb(153, 153, 153);
+        line-height: 50px;
+        text-align: center;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 16px;
+        .el-dialog__title {
+            font-weight: normal;
+            color: rgb(153, 153, 153);
+            font-size: 16px;
+        }
+        .el-dialog__close:hover {
+            color: rgb(191, 203, 217);
+        }
+        .el-dialog__headerbtn {
+        	top:0;
+        	font-size:24px !important;
+        	font-weight:600;
+            line-height: 50px !important;
+        }
+    }
+
+    .el-dialog__footer {
+        text-align: center;
+        .dialog-footer {
+            text-align: center;
+            button {
+                background: $mainColor;
+                border-color: $mainColor;
+                &:hover {
+                    background: $mainColor;
+                    border-color: $mainColor;
+                }
+            }
+        }
+    }
+}
+
+//取消按钮
+.el-button.cancel {
+    &, &:hover {
+        background: #d5d5d5 !important;
+        border-color: #d5d5d5 !important;
+        color: #999;
+    }
+}

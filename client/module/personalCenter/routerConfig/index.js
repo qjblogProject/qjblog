@@ -15,5 +15,10 @@ export default [
         path: '/edit',
         component:ArticelEdit,
         meta: metaData           
+    },
+    {
+        path:'/set',
+        component:Index,
+        meta:metaData
     }
 ];
