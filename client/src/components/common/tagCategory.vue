@@ -2,8 +2,8 @@
     <ul class="tag-category clearfix">
         <li v-for='item in dataList' 
             :key='item.id' class='fl' 
-            :class='"color-"+Math.floor(Math.random()*(10-1+1)+1)'
-            @click="handleClickTag(item.id)">
+            :class='["color-"+Math.floor(Math.random()*(10-1+1)+1),{disabled:hasCheck(item.id)}]'
+            @click="handleClickTag(item)">
             {{item.name}}
         </li>
     </ul>
@@ -15,6 +15,10 @@ export default {
         dataList:{
             type:Array,
             default:[]
+        },
+        filterList:{
+            type:Array,
+            default:[]
         }
     },
 	data(){
@@ -23,8 +27,19 @@ export default {
         }
     },
     methods:{
-        handleClickTag(id){
-            this.$emit('click',id)
+        handleClickTag(item){
+            if(this.hasCheck(item.id)){
+                return;
+            }
+            this.$emit('handleClickTag',item)
+        },
+        hasCheck(id){
+            let t = this;
+            for(let item of t.filterList){
+                if(id == item.id){
+                    return true;
+                }
+            }
         }
     }
 }
@@ -46,6 +61,9 @@ export default {
         font-size: 12px;
         line-height: 20px;
         color: #fff;
+        &.disabled{
+            background:#ccc!important;
+        }
         &.color-1,&.color-8{
             background:#a3bb51;
             &:hover{

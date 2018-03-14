@@ -7,6 +7,7 @@ export const homeModule = {
     state:{
         tableList:[],
         dateList:[],
+        tagList:[],
         totalCount:0,
         filterContent:{
             keywords:'',

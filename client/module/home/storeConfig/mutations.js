@@ -6,6 +6,10 @@ export const setDateList = (state,dateList)=>{
     state.dateList = dateList;
 }
 
+export const setTagList = (state,tagList)=>{
+    state.tagList = tagList;
+}
+
 export const setTotalCount = (state,count)=>{
     state.totalCount = count;
 }
@@ -19,7 +23,14 @@ export const updateFilterContent = (state,filter)=>{
     }else if(type == 'add'){
         filterContent[key].push(value)
     }else if(type == 'delete'){
-
+        for(let i=0;i<filterContent[key].length;i++){
+            let item = filterContent[key][i];
+            if(value.id == item.id){
+                filterContent[key].splice(i,1)
+                break;
+            }
+        }
+        
     }
 }
 //清空数据

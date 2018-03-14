@@ -12,9 +12,9 @@ module.exports = {
             sql += ` and (a.title like '%${keywords}%' or b.name like '%${keywords}%')`;
             flag = false;
         }
-        if(tags && tags.length > 0){ //先放在这，有问题
-            flag = false;
-        }
+        // if(tags && tags.length > 0){ //先放在这，有问题
+        //     flag = false;
+        // }
         if(publishTime){
             const dateList = publishTime.split(',');
             const min = dateList[0],max = dateList[1];
@@ -44,5 +44,10 @@ module.exports = {
         })
     },
 
-
+    getTagList(data,callback){
+        let sql = `select id,name from category`
+        query(sql,(err,result)=>{
+            callback(err,result)
+        })
+    }
 }
