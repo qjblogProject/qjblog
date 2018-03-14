@@ -1,9 +1,9 @@
 const query = require('./connectQuery')
-const articel = require('./articelDbModule')
+const article = require('./articleDbModule')
 const user = require('./userDbModule')
 
 let dbModule = {
-    articel,
+    article,
     user
 }
 module.exports = dbModule

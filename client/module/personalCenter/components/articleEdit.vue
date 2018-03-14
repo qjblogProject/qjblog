@@ -1,8 +1,9 @@
 <template>
-   	<div class="articel-edit">
+   	<div class="article-edit">
 		<div class='edit-menu clearfix'>
 			<p class='menu-title fl'>
 				文章编辑
+				{{articleData}}
 				<span class='error-text'>{{errorText}}</span>
 			</p>
 			<p class='btn-group fr'>
@@ -11,14 +12,14 @@
 			</p>
 		</div>
 		<div class='edit-content' :style='{"min-height":winHeight-60+"px"}'>
-			<el-row class='articel-title'>
+			<el-row class='article-title'>
 				<label class='fl'>文章标题</label>
 				<el-col :span='9'>
 					<el-input class='qj-input' v-model.trim="title" placeholder="请输入文章标题"></el-input>
 				</el-col>
 			</el-row>
 			<div id='editorHead' class='editor-head'></div>
-			<div id='editor'></div>
+			<div id='editor' :style='{"height":winHeight-240+"px"}'></div>
 		</div>
     </div>
 </template>
@@ -31,8 +32,8 @@ export default {
 	data(){
 		return {
 			editor:'',
-			articelId:'',
-			articelDraftId:'',
+			articleId:'',
+			draftId:'',
 			title:'',
 			content:'',
 			errorText:''
@@ -41,7 +42,16 @@ export default {
 	computed:{
 		...mapGetters('base',{
 			winHeight:'getWinHeight'
+		}),
+		...mapGetters('article',{
+			articleData:'getArticleData'
 		})
+	},
+	created(){
+		//articleData存在则是编辑，需要获取详情回填
+		if(this.articleData){
+			this.getArticleEditDetail();
+		}
 	},
 	mounted(){
 		this.createEditor();
@@ -58,6 +68,26 @@ export default {
 		handleGetEditContent(){
 			this.content = this.editor.txt.html();
 		},
+		//获取草稿文章详情(以后会做已保存文章的编辑)
+		getArticleEditDetail(){
+			let t = this;
+			let postData = {
+				articleId:t.articleData.articleId,
+				draftId:t.articleData.draftId
+			}
+			t.$store.dispatch('article/getArticleEditDetail',postData).then((res)=>{
+				if(!res.status){
+					t.$message.error(res.message)
+					return;
+				}
+				let data = res.data;
+				t.title = data.title;
+				t.content = data.content;
+				t.articleId = data.articleId;
+				t.draftId = data.draftId;
+				t.editor.txt.html(t.content)
+			})
+		},
 		handleSave(){
 			let t = this;
 			t.handleGetEditContent()
@@ -69,19 +99,24 @@ export default {
 			//构造postData数据
 			let postData = {
 					userId:3,
+					articleId:t.articleId,
+					draftId:t.draftId,
 					title:t.title,
 					content:t.content
 				}
-			if(t.articelId){
-				postData.articelId = t.articelId;
-			}
 			//ajax请求，保存文章
 			t.$http({
-				url:'/articel/ajax-save-articel',
+				url:'/article/ajax-save-article',
 				method:'post',
 				data:postData
 			}).then((res)=>{
-				console.log(res)
+				let data = res.data;
+				if(!data.status){
+					t.$message.error(data.message)
+					return;
+				}
+				t.articleId = data.data.articleId;
+				t.$message.success({type:'success',message:data.message})
 			})
 		},
 		handleSaveDraft(){
@@ -95,23 +130,25 @@ export default {
 			//构造postData数据
 			let postData = {
 					userId:3,
+					articleId:t.articleId,
+					draftId:t.draftId,
 					title:t.title,
 					content:t.content
 				}
-			if(t.articelDraftId){
-				postData.articelDraftId = t.articelDraftId;
-			}
+			
 			//ajax请求，保存文章
 			t.$http({
-				url:'/articel/ajax-save-articel-draft',
+				url:'/article/ajax-save-article-draft',
 				method:'post',
 				data:postData
 			}).then((res)=>{
-				if(!res.status){
-					t.$message.error(res.message)
+				let data = res.data;
+				if(!data.status){
+					t.$message.error(data.message)
 					return;
 				}
-				t.$message.success(res.message)
+				t.draftId = data.data.draftId;
+				t.$message({type:'success',message:data.message})
 			})
 		},
 		checkTitle(){
@@ -123,16 +160,19 @@ export default {
 				return true;
 			}
 		}
+	},
+	deactivated(){
+		this.$destroy(); //默认不做先不做keep-alive
 	}
 }
 </script>
 
 <style lang='scss'>
-.articel-edit{
+.article-edit{
 	.edit-menu{
 		box-sizing: border-box;
 		position: fixed;
-		z-index: 20000;
+		z-index: 100;
 		top: 0;
 		box-shadow: 0 1px 3px #e0e0e0;
 		width: 100%;
@@ -161,7 +201,7 @@ export default {
 		padding-right: 10%;
 		background: #fff;
 		box-shadow: 0 1px 3px #e0e0e0;
-		.articel-title{
+		.article-title{
 			padding: 40px 0 10px;
 			label{
 				width: 100px;
@@ -185,12 +225,14 @@ export default {
 		}
 		#editor{
 			margin: 20px auto 0;
-			min-height:300px;
+			// min-height:300px;
+			// max-height:500px;
 			border-top: solid 1px #ddd;
 			border-bottom: solid 1px #ddd;
 			.w-e-text{
-				overflow: hidden;
-				min-height: 300px;
+				overflow-y: auto;
+				// min-height: 300px;
+				// max-height:500px;
 			}
 		}
 	}

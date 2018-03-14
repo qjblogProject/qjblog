@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { baseModule } from 'src/baseStore'
 import { homeModule } from '../home/storeConfig'
+import { articleModule } from '../personalCenter/storeConfig'
 Vue.use(Vuex)
 
 const Store = new Vuex.Store({
@@ -12,6 +13,7 @@ const Store = new Vuex.Store({
     modules:{
         base:baseModule,
         home:homeModule,
+        article:articleModule
     }
 })
 

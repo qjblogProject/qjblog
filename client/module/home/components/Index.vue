@@ -114,6 +114,9 @@ export default {
 		'tag-category-component':tagCategoryComponent,
 		'search-component':searchComponent,
 		'date-category-component':dateCategoryComponent
+	},
+	deactivated(){
+		this.$destroy(); //默认不做先不做keep-alive
 	}
 }
 </script>

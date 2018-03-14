@@ -36,6 +36,9 @@ export default {
 		next(vm => {
 			vm.componentName = componentName;
 		});
+	},
+	deactivated(){
+		this.$destroy(); //默认不做先不做keep-alive
 	}
 }
 
