@@ -39,6 +39,7 @@ export default {
 
 <style lang='scss'>
 .header-wrap{
+    background: #fff;
     box-sizing: border-box;
     position: fixed;
     z-index: 10;
@@ -48,7 +49,6 @@ export default {
     height: 90px;
     border-top: 25px solid #31353e;
     border-bottom: 5px solid #a3bb51;
-    background: rgba(247,247,247,1);
     .top-text{
         position: absolute;
         top: -20px;

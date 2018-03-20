@@ -40,6 +40,10 @@ export default {
         }
     },
     created(){
+        let query = this.$route.query || {};
+        if(query.active){
+            this.activeName = query.active
+        }
         this.getArticleList()
     },
     methods:{

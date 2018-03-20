@@ -1,16 +1,15 @@
 <template>
    	<div class="article-edit">
-		<div class='edit-menu clearfix'>
-			<p class='menu-title fl'>
-				文章编辑
-				<span class='error-text'>{{errorText}}</span>
+		<second-header-component title='文章编辑' titlePosition='left'>
+			<p class='error-text fl'>
+				{{errorText}}
 			</p>
 			<p class='btn-group fr'>
 				<el-button @click='handleSave'>保存</el-button>
 				<el-button @click='handleSaveDraft'>存草稿</el-button>
 			</p>
-		</div>
-		<div class='edit-content' :style='{"min-height":winHeight-60+"px"}'>
+		</second-header-component>
+		<second-container-component>
 			<el-row class='article-title'>
 				<label class='fl'>文章标题</label>
 				<el-col :span='9'>
@@ -24,14 +23,16 @@
 				</el-col>
 			</el-row>
 			<div id='editorHead' class='editor-head'></div>
-			<div id='editor' :style='{"height":winHeight-330+"px"}'></div>
-		</div>
+			<div id='editor' :style='{"height":winHeight-350+"px"}'></div>
+		</second-container-component>
     </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
 import wangEditor from 'wangeditor'
+import secondContainerComponent from 'components/layout/second/container'
+import secondHeaderComponent from 'components/layout/second/header'
 
 export default {
 	data(){
@@ -171,6 +172,10 @@ export default {
 			}
 		}
 	},
+	components:{
+		'second-container-component':secondContainerComponent,
+		'second-header-component':secondHeaderComponent
+	},
 	deactivated(){
 		this.$destroy(); //默认不做先不做keep-alive
 	}
@@ -179,74 +184,53 @@ export default {
 
 <style lang='scss'>
 .article-edit{
-	.edit-menu{
-		box-sizing: border-box;
-		position: fixed;
-		z-index: 100;
-		top: 0;
-		box-shadow: 0 1px 3px #e0e0e0;
-		border-top: #a3bb51 solid 4px;
-		width: 100%;
-		padding: 0 10%;
-		height: 54px;
-		background: #fff;
-		.menu-title{
-			line-height: 50px;
-			font-weight: 500;
-			.error-text{
-				margin-left: 15px;
-				font-weight: normal;
-				color:#aaa;
-			}
-		}
-		.btn-group{
-			margin-top: 10px;
-			.el-button{
-				padding: 8px 10px;
-			}
+	.error-text{
+		line-height: 56px;
+		margin-left: 15px;
+		font-weight: normal;
+		color:#aaa;
+	}
+	.btn-group{
+		margin-top: 10px;
+		.el-button{
+			padding: 8px 10px;
 		}
 	}
-	.edit-content{
-		margin-top:60px;
-		padding-left: 10%;
-		padding-right: 10%;
-		background: #fff;
-		box-shadow: 0 1px 3px #e0e0e0;
-		.article-title,.article-abstract{
-			padding: 40px 0 10px;
-			label{
-				width: 100px;
-				line-height: 44px;
-			}
-			label:after{
-				content: '';
-				position: relative;
-				top: 14px;
-				float:right;
-				margin-right: 15px;
-				height: 16px;
-				border-left: solid 1px #e0e0e0;
-			}
+	
+	.article-title,.article-abstract{
+		padding: 40px 0 10px;
+		label{
+			width: 100px;
+			line-height: 44px;
 		}
-		.article-abstract{
-			padding-top: 20px;
+		label:after{
+			content: '';
+			position: relative;
+			top: 14px;
+			float:right;
+			margin-right: 15px;
+			height: 16px;
+			border-left: solid 1px #e0e0e0;
 		}
-		.editor-head{
-			margin: 20px auto 0;
-			border-top: solid 1px #ddd;
-			border-bottom: solid 1px #ddd;
-		}
-		#editor{
-			margin: 20px auto 0;
-			// min-height:300px;
+	}
+	.article-abstract{
+		padding-top: 20px;
+	}
+	.editor-head{
+		margin: 20px auto 0;
+		border-top: solid 1px #ddd;
+		border-bottom: solid 1px #ddd;
+	}
+	#editor{
+		margin: 20px auto 0;
+		// min-height:300px;
+		// max-height:500px;
+		border-top: solid 1px #ddd;
+		border-bottom: solid 1px #ddd;
+		.w-e-text{
+			overflow-y: auto;
+			// min-height: 300px;
 			// max-height:500px;
-			border-top: solid 1px #ddd;
-			border-bottom: solid 1px #ddd;
-			.w-e-text{
-				overflow-y: auto;
-				// min-height: 300px;
-				// max-height:500px;
-			}
 		}
 	}
 }

@@ -6,6 +6,7 @@ import loginConfig from '../login/routerConfig';
 import registerConfig from '../register/routerConfig';
 import articleDetailConfig from '../articleDetail/routerConfig';
 import personalCenterConfig from '../personalCenter/routerConfig';
+import settingConfig from '../setting/routerConfig';
 
 Vue.use(Router)
 
@@ -16,6 +17,7 @@ var routes = []
 .concat(registerConfig)
 .concat(articleDetailConfig)
 .concat(personalCenterConfig)
+.concat(settingConfig)
 
 export default new Router({
   mode: 'history',

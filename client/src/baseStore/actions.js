@@ -54,6 +54,8 @@ export const getUserInfo = function({commit}){
 			let result = res.data;
 			if(result.status) {
 				commit('updateUserInfo',result.data)
+			}else{
+				location.href='/login'
 			}
 			resolve(result)
 		})

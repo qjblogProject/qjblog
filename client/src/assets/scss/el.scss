@@ -20,23 +20,6 @@ body{
 // 	}
 // }
 
-.el-tabs{
-	.el-tabs__active-bar{
-		background: $mainColor;
-	}
-	.el-tabs__item{
-		width:120px;
-		text-align: center;
-	}
-	.el-tabs__item{
-		&.is-active{
-			color:$mainColor;
-		}
-		&:hover{
-			color:$mainColor;
-		}
-	}
-}
 
 .el-table--enable-row-hover .el-table__body tr:hover>td{
 	background: lighten($mainColor, 42%);
@@ -45,6 +28,7 @@ body{
 	border:none;
 }
 
+//input
 .el-input.qj-input, .el-select.qj-select, .qj-input.el-textarea{
 	input, textarea {
 		border-radius: 3px;
@@ -55,7 +39,7 @@ body{
 		border-color: $textViceHeaderColor;
 	}
 	input:focus, textarea:focus {
-		border-color: $link;
+		border-color: $mainColor;
 	}
 	&:focus{
 		background: $mainColor !important;
@@ -67,9 +51,85 @@ body{
 	}
 }
 
+//tab重写
+.el-tabs__item {
+    padding: 0 10px;
+    width: 125px;
+    height: 53px;
+    line-height: 70px;
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+.el-tabs__item.is-active, .el-tabs__item:hover.is-active, .el-tabs__item:hover{
+    color: $mainColor !important;
+}
+.el-tabs__active-bar {
+    background: $mainColor !important;
+}
+
+//loading 
 .el-loading-spinner .path{
 	stroke: #a3bb50!important;
 }
 .el-dialog__footer{
-	text-align: center;
+    text-align: center;
+}
+
+
+div.el-dialog {
+    padding: 0 20px;
+
+    .el-dialog__header {
+        padding: 0;
+        height: 50px;
+        border-bottom: 1px solid rgb(238, 236, 236);
+        color: rgb(153, 153, 153);
+        line-height: 50px;
+        text-align: center;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 16px;
+        .el-dialog__title {
+            font-weight: normal;
+            color: rgb(153, 153, 153);
+            font-size: 16px;
+        }
+        .el-dialog__close:hover {
+            color: rgb(191, 203, 217);
+        }
+        .el-dialog__headerbtn {
+        	top:0;
+        	font-size:24px !important;
+        	font-weight:600;
+            line-height: 50px !important;
+        }
+    }
+
+    .el-dialog__footer {
+        text-align: center;
+        .dialog-footer {
+            text-align: center;
+            button {
+                background: $mainColor;
+                border-color: $mainColor;
+                &:hover {
+                    background: $mainColor;
+                    border-color: $mainColor;
+                }
+            }
+        }
+    }
+}
+
+//取消按钮
+.el-button.cancle {
+    &, &:hover {
+        background: #d5d5d5 !important;
+        border-color: #d5d5d5 !important;
+        color: #999;
+    }
 }

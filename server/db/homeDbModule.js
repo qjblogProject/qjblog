@@ -42,12 +42,5 @@ module.exports = {
         query(sql,(err,result)=>{
             callback(err,result)
         })
-    },
-
-    getTagList(data,callback){
-        let sql = `select id,name from category`
-        query(sql,(err,result)=>{
-            callback(err,result)
-        })
     }
 }

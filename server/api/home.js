@@ -14,18 +14,6 @@ router.post('/home/ajax-get-basic-info',(req,res) => {
 	res.send(json);
 })
 
-//获取首页的文章列表
-router.post('/set/ajax-get-tag-list',(req,res) => {
-	let data = req.body;
-	db.home.getTagList(data,(err,result)=>{
-        if(err){
-            res.status(500).send({message:err,status:0,code:500}); 
-            return;
-		}
-        res.status(200).send({message:'获取标签分类列表成功',status:0,code:200,data:result});
-    })
-})
-
 //获取时间和文章数
 router.post('/home/ajax-get-dateMonth-list',(req,res) => {
 	let data = req.body;

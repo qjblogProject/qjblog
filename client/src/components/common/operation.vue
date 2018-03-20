@@ -4,11 +4,11 @@
             <i class='icon icon-edit'></i>
             <span class='edit'>写文章</span>
         </router-link>
-        <a href='javascript:void(0);' @click='han' class='fl'>
+        <a href='javascript:void(0);' @click='$router.push({path:"/personal",query: { active: "publish" }})' class='fl'>
             <i class='icon icon-visible'></i>
             <span class='visible'>发表</span>
         </a>
-        <router-link to='/' class='fl'>
+        <router-link to='/set' class='fl'>
             <i class='icon icon-set'></i>
             <span class='set'>设置</span>
         </router-link>

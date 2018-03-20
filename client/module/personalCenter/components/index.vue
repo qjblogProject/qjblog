@@ -16,7 +16,9 @@ import personalContent from './indexContent'
 
 export default {
     data(){
-        return{}
+        return{
+        
+        }
     },
     components:{
 		'header-component':headerComponent,

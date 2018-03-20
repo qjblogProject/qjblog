@@ -4,7 +4,7 @@ const login = require('./login')
 const register = require('./register')
 const home = require('./home')
 const article = require('./article')
-
+const setting = require('./setting')
 
 module.exports = (app)=>{
     //在此处做app.use(api)
@@ -13,4 +13,5 @@ module.exports = (app)=>{
     app.use(register)
     app.use(home)
     app.use(article)
+    app.use(setting)
 }

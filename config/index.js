@@ -14,6 +14,9 @@ module.exports = {
       '/api':{
         target:'http://localhost:3000'
       },
+      // '/set':{
+      //   target:'http://localhost:3000'
+      // },
       '**/ajax**':{
         target:'http://localhost:3000'
       }

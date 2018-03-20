@@ -57,7 +57,6 @@ export default {
 		const t = this;
 		t.$store.dispatch('base/getUserInfo')
 		t.$store.dispatch('home/getDateList')
-		t.$store.dispatch('home/getTagList')
 	},
 	data(){
 		return {
@@ -70,10 +69,17 @@ export default {
 		}),
 		...mapGetters('home',{
 			dateList:'getDateList',
-			tagList:'getTagList',
 			filterContent:'getFilterContent',
 			totalCount:'getTotalCount'
+		}),
+		...mapGetters('setting',{
+			tagList:'getTagList'
 		})
+	},
+	mounted(){
+		if(this.tagList.length <= 0){
+			this.$store.dispatch('setting/getTagList')
+		}
 	},
 	methods:{
 		handleClickTag(item){

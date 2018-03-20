@@ -6,10 +6,6 @@ export const setDateList = (state,dateList)=>{
     state.dateList = dateList;
 }
 
-export const setTagList = (state,tagList)=>{
-    state.tagList = tagList;
-}
-
 export const setTotalCount = (state,count)=>{
     state.totalCount = count;
 }
